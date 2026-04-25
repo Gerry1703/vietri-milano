@@ -28,7 +28,7 @@ export default function Collection() {
           <p className="label-upper text-gold mt-3 tracking-widest2">VIETRI Milano</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-12 max-w-4xl mx-auto">
           {filtered.map((p, i) => (
             <motion.div
               key={p.id}
