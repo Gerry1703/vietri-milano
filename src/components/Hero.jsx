@@ -29,7 +29,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease }}
           className="font-cormorant font-light text-cream uppercase tracking-widest4 leading-none"
-          style={{ fontSize: 'clamp(80px, 12vw, 160px)' }}
+          style={{ fontSize: 'clamp(48px, 12vw, 160px)' }}
         >
           VIETRI
         </motion.h1>
