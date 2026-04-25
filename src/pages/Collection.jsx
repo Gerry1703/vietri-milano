@@ -28,7 +28,7 @@ export default function Collection() {
           <p className="label-upper text-gold mt-3 tracking-widest2">VIETRI Milano</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
           {filtered.map((p, i) => (
             <motion.div
               key={p.id}
@@ -37,7 +37,7 @@ export default function Collection() {
               transition={{ duration: 0.9, delay: i * 0.1, ease }}
             >
               <Link to={`/product/${p.id}`} className="block group">
-                <div className="relative overflow-hidden" style={{ aspectRatio: '4/5', background: '#1a1008' }}>
+                <div className="relative overflow-hidden" style={{ aspectRatio: '3/4', background: '#1a1008' }}>
                   {p.tag && (
                     <span className="absolute top-3 left-3 z-10 label-upper text-gold bg-brown-dark/80 px-2 py-1 text-[10px]">
                       {p.tag}
