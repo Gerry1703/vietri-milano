@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brown-dark:  #2C1A0E;
+  --brown-mid:   #4A2C1A;
+  --beige-light: #F5EFE6;
+  --beige-warm:  #E8D9C5;
+  --cream:       #FDFAF6;
+  --gold-accent: #B8975A;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-beige-light text-brown-dark font-inter;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .heading-display {
+    @apply font-cormorant font-light tracking-widest3 uppercase;
+  }
+
+  .label-upper {
+    @apply font-inter font-light text-xs uppercase tracking-widest2;
+  }
+
+  .btn-outline-cream {
+    @apply border border-cream text-cream font-inter font-light text-xs uppercase tracking-widest2 px-8 py-3 transition-all duration-300;
+  }
+  .btn-outline-cream:hover {
+    @apply bg-brown-dark text-cream;
+  }
+
+  .btn-outline-gold {
+    @apply border border-gold text-gold font-inter font-light text-xs uppercase tracking-widest2 px-8 py-3 transition-all duration-300;
+  }
+  .btn-outline-gold:hover {
+    @apply bg-gold text-brown-dark;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--beige-light); }
+::-webkit-scrollbar-thumb { background: var(--gold-accent); border-radius: 2px; }
