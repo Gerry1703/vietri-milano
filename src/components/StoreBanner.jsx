@@ -45,7 +45,7 @@ export default function StoreBanner() {
           <circle cx="8" cy="7" r="2" />
         </svg>
         <p className="label-upper text-gold tracking-widest2">
-          Corso Vercelli, Milano &nbsp;·&nbsp; Lun–Sab 10:00–19:30
+          Corso Vercelli, Milano &nbsp;·&nbsp; Lun–Dom 10:00–19:30
         </p>
       </motion.div>
     </section>

@@ -16,7 +16,7 @@ export default function Footer() {
           <h3 className="label-upper text-gold tracking-widest2 mb-5">Il Negozio</h3>
           <p className="font-inter font-light text-cream/60 text-sm leading-loose">
             Corso Vercelli, Milano<br />
-            Lun–Sab 10:00–19:30
+            Lun–Dom 10:00–19:30
           </p>
         </div>
 
