@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -13,12 +13,22 @@ const links = [
 export default function Navbar({ onCartOpen, cartCount }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { pathname } = useLocation()
+
+  const isHomePage = pathname === '/'
+  const useDarkText = !isHomePage && !scrolled
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const textClass = useDarkText
+    ? 'text-brown-dark/80 hover:text-brown-dark'
+    : 'text-cream/80 hover:text-cream'
+
+  const wordmarkClass = useDarkText ? 'text-brown-dark' : 'text-cream'
 
   return (
     <>
@@ -29,12 +39,14 @@ export default function Navbar({ onCartOpen, cartCount }) {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? 'bg-[rgba(44,26,14,0.95)] backdrop-blur-[12px]'
-            : 'bg-transparent'
+            : useDarkText
+              ? 'bg-beige-light/80 backdrop-blur-[8px]'
+              : 'bg-transparent'
         }`}
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
           {/* Wordmark */}
-          <Link to="/" className="font-cormorant font-light text-cream tracking-widest4 text-xl md:text-2xl select-none">
+          <Link to="/" className={`font-cormorant font-light tracking-widest4 text-xl md:text-2xl select-none transition-colors duration-300 ${wordmarkClass}`}>
             VIETRI
           </Link>
 
@@ -44,7 +56,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
               <Link
                 key={l.label}
                 to={l.to}
-                className="label-upper text-cream/80 hover:text-cream transition-colors duration-300"
+                className={`label-upper transition-colors duration-300 ${textClass}`}
               >
                 {l.label}
               </Link>
@@ -54,7 +66,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
           {/* Icons */}
           <div className="flex items-center gap-5">
             {/* Search */}
-            <button aria-label="Cerca" className="text-cream/80 hover:text-cream transition-colors duration-300">
+            <button aria-label="Cerca" className={`transition-colors duration-300 ${textClass}`}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
@@ -64,7 +76,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
             <button
               aria-label="Carrello"
               onClick={onCartOpen}
-              className="relative text-cream/80 hover:text-cream transition-colors duration-300"
+              className={`relative transition-colors duration-300 ${textClass}`}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
@@ -79,7 +91,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
             {/* Hamburger (mobile) */}
             <button
               aria-label="Menu"
-              className="md:hidden text-cream/80 hover:text-cream transition-colors duration-300"
+              className={`md:hidden transition-colors duration-300 ${textClass}`}
               onClick={() => setMenuOpen(true)}
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
