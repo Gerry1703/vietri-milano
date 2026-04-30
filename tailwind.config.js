@@ -8,7 +8,7 @@ export default {
         'brown-mid':   '#4A2C1A',
         'beige-light': '#F5EFE6',
         'beige-warm':  '#E8D9C5',
-        cream:         '#FDFAF6',
+        cream:         '#F5EFE6',
         gold:          '#B8975A',
       },
       fontFamily: {
