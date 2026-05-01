@@ -25,7 +25,7 @@ export default function ProductDetail({ onAddToCart }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease }}
           className="md:w-1/2 md:sticky md:top-20 md:h-[calc(100vh-5rem)] overflow-hidden"
-          style={{ background: '#1a1008' }}
+          style={{ background: '#F4F0E7' }}
         >
           <img src={p.image} alt={p.name}
             className="w-full h-full object-cover object-center" />
