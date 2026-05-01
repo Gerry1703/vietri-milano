@@ -2,6 +2,7 @@ import sciarpaRossaHero from '@/assets/images/scarves/sciarpa-rossa-hero.jpg'
 import sciarpaRossaGrid from '@/assets/images/scarves/sciarpa-rossa-grid.jpg'
 import sciarpaRossaAlt  from '@/assets/images/scarves/sciarpa-rossa-alt.jpg'
 import sciarpaArancio   from '@/assets/images/scarves/sciarpa-arancio.jpg'
+import sciarpaVietri    from '@/assets/images/scarves/sciarpa-vietri.jpg'
 import borsaVerde       from '@/assets/images/bags/borsa-verde.jpg'
 import borsaCognac      from '@/assets/images/bags/borsa-cognac.jpg'
 import borsaBrera       from '@/assets/images/bags/borsa-brera.jpg'
@@ -40,6 +41,16 @@ export const products = [
   },
   {
     id: 4,
+    name: 'Sciarpa Vietri',
+    category: 'Sciarpe',
+    material: 'Seta pura',
+    price: '€ 310',
+    image: sciarpaVietri,
+    tag: 'NEW',
+    description: 'Stampa botanica su seta naturale. Fiori, foglie e il marchio VIETRI Milano tessuto nel tempo.',
+  },
+  {
+    id: 5,
     name: 'Borsa Navigli',
     category: 'Borse',
     material: 'Pelle grana italiana',
@@ -49,7 +60,7 @@ export const products = [
     description: 'Pelle lime in grana italiana. Un nodo come firma, non come chiusura.',
   },
   {
-    id: 5,
+    id: 6,
     name: 'Borsa Brera',
     category: 'Borse',
     material: 'Camoscio italiano',
@@ -59,7 +70,7 @@ export const products = [
     description: 'Camoscio azzurro polvere, morbido al tatto. Il nodo, unica chiusura necessaria.',
   },
   {
-    id: 6,
+    id: 7,
     name: 'Cofanetto Vercelli',
     category: 'Borse',
     material: 'Camoscio & seta',
