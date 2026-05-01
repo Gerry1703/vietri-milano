@@ -15,8 +15,9 @@ export default function Navbar({ onCartOpen, cartCount }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const { pathname } = useLocation()
 
-  const isHomePage = pathname === '/'
-  const useDarkText = !isHomePage && !scrolled
+  const isHomePage    = pathname === '/'
+  const isProductPage = pathname.startsWith('/product/')
+  const useDarkText   = !isHomePage && !isProductPage && !scrolled
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -37,7 +38,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          scrolled || isProductPage
             ? 'bg-[rgba(44,26,14,0.95)] backdrop-blur-[12px]'
             : useDarkText
               ? 'bg-beige-light/80 backdrop-blur-[8px]'

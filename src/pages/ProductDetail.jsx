@@ -18,13 +18,13 @@ export default function ProductDetail({ onAddToCart }) {
 
   return (
     <main className="bg-beige-light min-h-screen">
-      <div className="flex flex-col md:flex-row min-h-screen pt-16 md:pt-0">
+      <div className="flex flex-col md:flex-row min-h-screen pt-16 md:pt-20">
         {/* Image */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease }}
-          className="md:w-1/2 md:sticky md:top-0 md:h-screen overflow-hidden"
+          className="md:w-1/2 md:sticky md:top-20 md:h-[calc(100vh-5rem)] overflow-hidden"
           style={{ background: '#1a1008' }}
         >
           <img src={p.image} alt={p.name}
