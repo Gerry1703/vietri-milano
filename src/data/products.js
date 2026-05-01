@@ -4,6 +4,7 @@ import sciarpaRossaAlt  from '@/assets/images/scarves/sciarpa-rossa-alt.jpg'
 import sciarpaArancio   from '@/assets/images/scarves/sciarpa-arancio.jpg'
 import borsaVerde       from '@/assets/images/bags/borsa-verde.jpg'
 import borsaCognac      from '@/assets/images/bags/borsa-cognac.jpg'
+import borsaBrera       from '@/assets/images/bags/borsa-brera.jpg'
 import borsaFlatlay     from '@/assets/images/bags/borsa-flatlay.jpg'
 
 export const products = [
@@ -51,11 +52,11 @@ export const products = [
     id: 5,
     name: 'Borsa Brera',
     category: 'Borse',
-    material: 'Pelle togo',
+    material: 'Camoscio italiano',
     price: '€ 920',
-    image: borsaCognac,
+    image: borsaBrera,
     tag: null,
-    description: 'Struttura classica, spirito milanese. Fermaglio dorato, pelle togo cognac.',
+    description: 'Camoscio azzurro polvere, morbido al tatto. Il nodo, unica chiusura necessaria.',
   },
   {
     id: 6,
