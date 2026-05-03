@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import sciarpaRossaAlt from '@/assets/images/scarves/sciarpa-rossa-alt.jpg'
-import borsaVerde      from '@/assets/images/bags/borsa-verde.jpg'
+import borsaVerde      from '@/assets/images/bags/borsa-verde.png'
 import sciarpaArancio  from '@/assets/images/scarves/sciarpa-arancio.jpg'
 import borsaCognac     from '@/assets/images/bags/borsa-cognac.jpg'
 
