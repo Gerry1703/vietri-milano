@@ -37,14 +37,15 @@ export default function Collection() {
               transition={{ duration: 0.9, delay: i * 0.1, ease }}
             >
               <Link to={`/product/${p.id}`} className="block group">
-                <div className="relative overflow-hidden" style={{ aspectRatio: '1/1', background: '#1a1008' }}>
+                <div className="relative overflow-hidden" style={{ aspectRatio: '1/1', background: '#F4F0E7' }}>
                   {p.tag && (
                     <span className="absolute top-3 left-3 z-10 label-upper text-gold bg-brown-dark/80 px-2 py-1 text-[10px]">
                       {p.tag}
                     </span>
                   )}
                   <img src={p.image} alt={p.name}
-                    className="w-full h-full object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]" />
+                    className="w-full h-full object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]"
+                    style={{ mixBlendMode: 'multiply' }} />
                   <div className="absolute inset-0 bg-brown-dark/0 group-hover:bg-brown-dark/50 transition-all duration-[600ms] flex items-center justify-center">
                     <span className="label-upper text-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300">Scopri →</span>
                   </div>
