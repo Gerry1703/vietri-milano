@@ -28,7 +28,8 @@ export default function ProductDetail({ onAddToCart }) {
           style={{ background: '#F4F0E7' }}
         >
           <img src={p.image} alt={p.name}
-            className="w-full h-full object-cover object-center" />
+            className="w-full h-full object-cover object-center"
+            style={{ mixBlendMode: 'multiply' }} />
         </motion.div>
 
         {/* Info */}
