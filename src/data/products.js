@@ -5,7 +5,7 @@ import sciarpaArancio   from '@/assets/images/scarves/sciarpa-arancio.jpg'
 import sciarpaVietri    from '@/assets/images/scarves/sciarpa-vietri.jpg'
 import borsaVerde       from '@/assets/images/bags/borsa-verde.jpg'
 import borsaCognac      from '@/assets/images/bags/borsa-cognac.jpg'
-import borsaBrera       from '@/assets/images/bags/borsa-brera.jpg'
+import borsaBrera       from '@/assets/images/bags/borsa-brera.png'
 import borsaFlatlay     from '@/assets/images/bags/borsa-flatlay.jpg'
 
 export const products = [
