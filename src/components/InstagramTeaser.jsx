@@ -57,13 +57,13 @@ export default function InstagramTeaser() {
   }
 
   return (
-    <section ref={ref} className="bg-brown-dark py-16 md:py-24 overflow-hidden">
+    <section ref={ref} className="bg-brown-dark min-h-screen flex flex-col justify-between py-20 md:py-24 overflow-hidden">
       <div className="px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease }}
-          className="flex items-baseline gap-3 mb-10"
+          className="flex items-baseline gap-3 mb-12 md:mb-16"
         >
           <h2 className="label-upper text-cream text-sm tracking-widest3">
             FOLLOW
@@ -74,11 +74,11 @@ export default function InstagramTeaser() {
         </motion.div>
       </div>
 
-      <div className="relative">
+      <div className="relative flex-1 flex items-center">
         {/* Carousel */}
         <div
           ref={scroller}
-          className="flex gap-3 md:gap-4 overflow-x-auto pl-6 md:pl-10 pr-6 md:pr-10 snap-x snap-mandatory"
+          className="w-full flex gap-3 md:gap-4 overflow-x-auto pl-6 md:pl-10 pr-6 md:pr-10 snap-x snap-mandatory"
           style={{ scrollbarWidth: 'none' }}
         >
           {tiles.map((tile, i) => (
@@ -91,7 +91,7 @@ export default function InstagramTeaser() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: i * 0.08, ease }}
               className="flex-shrink-0 snap-start relative overflow-hidden group bg-[#1a1008]"
-              style={{ width: 'clamp(220px, 22vw, 360px)', aspectRatio: '3/4' }}
+              style={{ width: 'clamp(280px, 28vw, 460px)', aspectRatio: '3/4' }}
             >
               <img
                 src={tile.src}
@@ -129,7 +129,7 @@ export default function InstagramTeaser() {
         )}
       </div>
 
-      <div className="px-6 md:px-10 mt-8">
+      <div className="px-6 md:px-10 mt-10">
         <a
           href="https://instagram.com/vietrimilano"
           target="_blank"
@@ -139,6 +139,21 @@ export default function InstagramTeaser() {
           Vedi tutto
         </a>
       </div>
+
+      {/* Giant wordmark */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1.2, delay: 0.3, ease }}
+        className="mt-16 md:mt-24 px-2 md:px-4"
+      >
+        <h3
+          className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none text-center select-none whitespace-nowrap"
+          style={{ fontSize: 'clamp(48px, 14vw, 240px)' }}
+        >
+          GERARDO VIETRI
+        </h3>
+      </motion.div>
     </section>
   )
 }
