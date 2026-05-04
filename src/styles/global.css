@@ -52,7 +52,6 @@
   }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--beige-light); }
-::-webkit-scrollbar-thumb { background: var(--gold-accent); border-radius: 2px; }
+/* Hide scrollbars everywhere */
+::-webkit-scrollbar { width: 0; height: 0; display: none; }
+* { scrollbar-width: none; -ms-overflow-style: none; }

@@ -1,5 +1,8 @@
 import sciarpaRossaHero from '@/assets/images/scarves/sciarpa-rossa-hero.jpg'
 import sciarpaRossaGrid from '@/assets/images/scarves/sciarpa-rossa-grid.png'
+import venezia2         from '@/assets/images/scarves/venezia-2.png'
+import venezia3         from '@/assets/images/scarves/venezia-3.png'
+import venezia4         from '@/assets/images/scarves/venezia-4.png'
 import sciarpaRossaAlt  from '@/assets/images/scarves/sciarpa-rossa-alt.jpg'
 import sciarpaArancio   from '@/assets/images/scarves/sciarpa-arancio.jpg'
 import sciarpaVietri    from '@/assets/images/scarves/sciarpa-vietri.png'
@@ -16,6 +19,7 @@ export const products = [
     material: 'Seta pura',
     price: '€ 290',
     image: sciarpaRossaGrid,
+    gallery: [venezia2, venezia3, venezia4],
     tag: 'NEW',
     description: 'Seta leggera come un respiro. Tinta in rosso borgogna, drappeggiata a mano.',
   },

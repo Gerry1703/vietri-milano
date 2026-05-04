@@ -16,28 +16,33 @@ export default function ProductDetail({ onAddToCart }) {
     )
   }
 
+  const allImages = [p.image, ...(p.gallery || [])]
+
   return (
     <main className="bg-beige-light min-h-screen">
       <div className="flex flex-col md:flex-row min-h-screen pt-16 md:pt-20">
-        {/* Image */}
+        {/* Images column — scrolls naturally */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease }}
-          className="md:w-1/2 md:sticky md:top-20 md:h-[calc(100vh-5rem)] overflow-hidden"
+          className="md:w-1/2 flex flex-col"
           style={{ background: '#F4F0E7' }}
         >
-          <img src={p.image} alt={p.name}
-            className="w-full h-full object-cover object-center"
-            />
+          {allImages.map((src, i) => (
+            <div key={i} className="w-full overflow-hidden" style={{ background: '#F4F0E7' }}>
+              <img src={src} alt={`${p.name} ${i + 1}`}
+                className="w-full h-auto object-contain" />
+            </div>
+          ))}
         </motion.div>
 
-        {/* Info */}
+        {/* Info — sticky on desktop */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease }}
-          className="md:w-1/2 flex flex-col justify-center px-10 md:px-16 lg:px-20 py-20"
+          className="md:w-1/2 md:sticky md:top-20 md:h-[calc(100vh-5rem)] flex flex-col justify-center px-10 md:px-16 lg:px-20 py-20"
         >
           <Link to="/collection" className="label-upper text-brown-mid/50 hover:text-gold transition-colors mb-8 self-start tracking-widest2">
             ← Collezione
