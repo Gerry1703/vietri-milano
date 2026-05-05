@@ -10,7 +10,7 @@ export default function FeaturedProduct({ onAddToCart }) {
   const leftIn  = useInView(leftRef, { once: true, margin: '-80px' })
 
   return (
-    <section className="flex flex-col md:flex-row min-h-[90vh] overflow-hidden">
+    <section className="flex flex-col md:flex-row min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] md:h-[calc(100vh-5rem)] overflow-hidden">
       {/* Left: image */}
       <motion.div
         ref={leftRef}

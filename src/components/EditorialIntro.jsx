@@ -16,7 +16,7 @@ export default function EditorialIntro() {
 
   return (
     <section ref={sectionRef} className="bg-beige-light overflow-hidden">
-      <div className="flex flex-col md:flex-row min-h-[80vh]">
+      <div className="flex flex-col md:flex-row min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] md:h-[calc(100vh-5rem)]">
         {/* Left: parallax image */}
         <motion.div
           ref={leftRef}
