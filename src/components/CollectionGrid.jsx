@@ -29,12 +29,6 @@ function ProductCard({ product, index }) {
             alt={product.name}
             className="w-full h-full object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]"
           />
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-brown-dark/0 group-hover:bg-brown-dark/50 transition-all duration-[600ms] flex items-center justify-center">
-            <span className="label-upper text-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300 tracking-widest2">
-              Scopri →
-            </span>
-          </div>
         </div>
 
         {/* Info */}

@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import borsaFlatlay from '@/assets/images/bags/borsa-flatlay.jpg'
+import vietriLabel from '@/assets/images/scarves/vietri-label-hero.png'
 
 export default function ParallaxBreak() {
   const ref = useRef(null)
@@ -11,7 +11,7 @@ export default function ParallaxBreak() {
     <section ref={ref} className="relative overflow-hidden" style={{ height: '60vh' }}>
       <motion.div className="absolute inset-0 w-full h-full" style={{ y: imgY }}>
         <img
-          src={borsaFlatlay}
+          src={vietriLabel}
           alt="Fatto in Italia — VIETRI Milano"
           className="w-full h-full object-cover object-center scale-125"
         />
