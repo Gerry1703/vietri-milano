@@ -75,7 +75,7 @@ export default function InstagramTeaser() {
         </motion.div>
       </div>
 
-      <div className="relative flex-1 flex items-center min-h-0">
+      <div className="relative flex items-end min-h-0">
         {/* Carousel */}
         <div
           ref={scroller}
@@ -91,8 +91,8 @@ export default function InstagramTeaser() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: i * 0.08, ease }}
-              className="flex-shrink-0 snap-start relative overflow-hidden group bg-[#1a1008] h-full"
-              style={{ aspectRatio: '3/4' }}
+              className="flex-shrink-0 snap-start relative overflow-hidden group bg-[#1a1008]"
+              style={{ aspectRatio: '3/4', height: 'clamp(160px, 42vh, 400px)' }}
             >
               <img
                 src={tile.src}
