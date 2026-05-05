@@ -45,9 +45,6 @@ export default function Collection() {
                   )}
                   <img src={p.image} alt={p.name}
                     className="w-full h-full object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]" />
-                  <div className="absolute inset-0 bg-brown-dark/0 group-hover:bg-brown-dark/50 transition-all duration-[600ms] flex items-center justify-center">
-                    <span className="label-upper text-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300">Scopri →</span>
-                  </div>
                 </div>
                 <div className="pt-4">
                   <h3 className="font-cormorant font-normal text-brown-dark text-[22px]">{p.name}</h3>
