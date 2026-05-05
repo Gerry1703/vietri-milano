@@ -57,13 +57,13 @@ export default function InstagramTeaser() {
   }
 
   return (
-    <section ref={ref} className="bg-brown-dark min-h-screen flex flex-col justify-between py-20 md:py-24 overflow-hidden">
+    <section ref={ref} className="bg-brown-dark min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-8 md:py-10 overflow-hidden">
       <div className="px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease }}
-          className="flex items-baseline gap-3 mb-12 md:mb-16"
+          className="flex items-baseline gap-3 mb-6 md:mb-8"
         >
           <h2 className="label-upper text-cream text-sm tracking-widest3">
             FOLLOW
@@ -74,7 +74,7 @@ export default function InstagramTeaser() {
         </motion.div>
       </div>
 
-      <div className="relative flex-1 flex items-center">
+      <div className="relative flex-1 flex items-center min-h-0">
         {/* Carousel */}
         <div
           ref={scroller}
@@ -90,8 +90,8 @@ export default function InstagramTeaser() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: i * 0.08, ease }}
-              className="flex-shrink-0 snap-start relative overflow-hidden group bg-[#1a1008]"
-              style={{ width: 'clamp(280px, 28vw, 460px)', aspectRatio: '3/4' }}
+              className="flex-shrink-0 snap-start relative overflow-hidden group bg-[#1a1008] h-full"
+              style={{ aspectRatio: '3/4' }}
             >
               <img
                 src={tile.src}
@@ -129,7 +129,7 @@ export default function InstagramTeaser() {
         )}
       </div>
 
-      <div className="px-6 md:px-10 mt-10">
+      <div className="px-6 md:px-10 mt-4 md:mt-6">
         <a
           href="https://instagram.com/vietrimilano"
           target="_blank"
@@ -140,19 +140,32 @@ export default function InstagramTeaser() {
         </a>
       </div>
 
-      {/* Giant wordmark */}
+      {/* Giant wordmark — fits full width with logo slot in middle */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1.2, delay: 0.3, ease }}
-        className="mt-16 md:mt-24 px-2 md:px-4"
+        className="mt-6 md:mt-8 px-4 md:px-6 flex items-center justify-center gap-[0.4em] select-none w-full"
       >
-        <h3
-          className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none text-center select-none whitespace-nowrap"
-          style={{ fontSize: 'clamp(48px, 14vw, 240px)' }}
+        <span
+          className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none whitespace-nowrap"
+          style={{ fontSize: 'clamp(28px, 9vw, 160px)' }}
         >
-          GERARDO VIETRI
-        </h3>
+          GERARDO
+        </span>
+        {/* Logo placeholder — will be replaced with GV monogram */}
+        <span
+          className="font-cormorant font-light text-cream uppercase leading-none whitespace-nowrap"
+          style={{ fontSize: 'clamp(36px, 11vw, 200px)', letterSpacing: '-0.05em' }}
+        >
+          GV
+        </span>
+        <span
+          className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none whitespace-nowrap"
+          style={{ fontSize: 'clamp(28px, 9vw, 160px)' }}
+        >
+          VIETRI
+        </span>
       </motion.div>
     </section>
   )
