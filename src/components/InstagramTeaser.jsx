@@ -146,11 +146,11 @@ export default function InstagramTeaser() {
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1.2, delay: 0.3, ease }}
-        className="mt-6 md:mt-8 px-4 md:px-6 flex items-center justify-center gap-[0.4em] select-none w-full"
+        className="mt-6 md:mt-8 flex items-center justify-center gap-[0.3em] select-none w-full"
       >
         <span
           className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none whitespace-nowrap"
-          style={{ fontSize: 'clamp(28px, 9vw, 160px)' }}
+          style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
         >
           GERARDO
         </span>
@@ -159,11 +159,11 @@ export default function InstagramTeaser() {
           src={gvLogo}
           alt="GV"
           className="w-auto select-none"
-          style={{ height: 'clamp(40px, 11vw, 200px)', filter: 'invert(1)' }}
+          style={{ height: 'clamp(32px, 8.8vw, 158px)', filter: 'invert(1)' }}
         />
         <span
           className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none whitespace-nowrap"
-          style={{ fontSize: 'clamp(28px, 9vw, 160px)' }}
+          style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
         >
           VIETRI
         </span>
