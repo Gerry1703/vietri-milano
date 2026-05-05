@@ -1,4 +1,4 @@
-import sciarpaRossaHero from '@/assets/images/scarves/hero-label.png'
+import sciarpaRossaHero from '@/assets/images/scarves/hero-silk.png'
 import sciarpaRossaGrid from '@/assets/images/scarves/sciarpa-rossa-grid.png'
 import venezia2         from '@/assets/images/scarves/venezia-2.png'
 import venezia3         from '@/assets/images/scarves/venezia-3.png'
