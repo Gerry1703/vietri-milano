@@ -9,6 +9,7 @@ import venezia3         from '@/assets/images/scarves/venezia-3.png'
 import venezia4         from '@/assets/images/scarves/venezia-4.png'
 import borsaVerde       from '@/assets/images/bags/borsa-verde.png'
 import borsaBrera       from '@/assets/images/bags/borsa-brera.png'
+import gvLogo           from '@/assets/images/logo/gv.png'
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -153,13 +154,13 @@ export default function InstagramTeaser() {
         >
           GERARDO
         </span>
-        {/* Logo placeholder — will be replaced with GV monogram */}
-        <span
-          className="font-cormorant font-light text-cream uppercase leading-none whitespace-nowrap"
-          style={{ fontSize: 'clamp(36px, 11vw, 200px)', letterSpacing: '-0.05em' }}
-        >
-          GV
-        </span>
+        {/* GV monogram logo (inverted to cream on dark bg) */}
+        <img
+          src={gvLogo}
+          alt="GV"
+          className="w-auto select-none"
+          style={{ height: 'clamp(40px, 11vw, 200px)', filter: 'invert(1)' }}
+        />
         <span
           className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none whitespace-nowrap"
           style={{ fontSize: 'clamp(28px, 9vw, 160px)' }}
