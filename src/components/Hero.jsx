@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -6,15 +6,23 @@ const ease = [0.22, 1, 0.36, 1]
 
 export default function Hero() {
   const ref = useRef(null)
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.muted = true        // React non trasferisce muted all'elemento DOM, va fatto via JS
+    v.play().catch(() => {})
+  }, [])
 
   return (
     <section ref={ref} className="relative w-full h-screen overflow-hidden">
       {/* Video background */}
       <div className="absolute inset-0 w-full h-full">
         <video
+          ref={videoRef}
           autoPlay
           loop
-          muted
           playsInline
           className="w-full h-full object-cover object-center"
         >
