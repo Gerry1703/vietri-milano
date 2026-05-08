@@ -11,8 +11,14 @@ export default function Hero() {
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    v.muted = true        // React non trasferisce muted all'elemento DOM, va fatto via JS
-    v.play().catch(() => {})
+    v.muted = true
+    const attempt = () => v.play().catch(() => {})
+    if (v.readyState >= 3) {
+      attempt()
+    } else {
+      v.addEventListener('canplay', attempt, { once: true })
+    }
+    return () => v.removeEventListener('canplay', attempt)
   }, [])
 
   return (
@@ -24,6 +30,7 @@ export default function Hero() {
           autoPlay
           loop
           playsInline
+          preload="auto"
           className="w-full h-full object-cover object-center"
         >
           <source src="/vietri-hero-boomerang.mp4" type="video/mp4" />
