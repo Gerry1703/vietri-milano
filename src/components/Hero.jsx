@@ -1,26 +1,27 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { heroImages } from '@/data/products'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 const ease = [0.22, 1, 0.36, 1]
 
 export default function Hero() {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
 
   return (
     <section ref={ref} className="relative w-full h-screen overflow-hidden">
-      {/* Parallax image */}
-      <motion.div className="absolute inset-0 w-full h-full" style={{ y: imgY }}>
-        <img
-          src={heroImages.primary}
-          alt="VIETRI Milano — sciarpa rossa"
-          className="w-full h-full object-cover object-center scale-105"
-        />
+      {/* Video background */}
+      <div className="absolute inset-0 w-full h-full">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover object-center"
+        >
+          <source src="/vietri-hero-boomerang.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-black/25" />
-      </motion.div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
