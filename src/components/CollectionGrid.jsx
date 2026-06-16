@@ -1,83 +1,87 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { products } from '@/data/products'
 import { Link } from 'react-router-dom'
 
 const ease = [0.22, 1, 0.36, 1]
-
-function ProductCard({ product, index }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, delay: index * 0.12, ease }}
-    >
-      <Link to={`/product/${product.id}`} className="block group">
-        {/* Image */}
-        <div className="relative overflow-hidden" style={{ aspectRatio: '4/5', background: '#1a1008' }}>
-          {product.tag && (
-            <span className="absolute top-3 left-3 z-10 label-upper text-gold bg-brown-dark/80 px-2 py-1 text-[10px]">
-              {product.tag}
-            </span>
-          )}
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]"
-          />
-        </div>
-
-        {/* Info */}
-        <div className="pt-4 pb-2">
-          <h3 className="font-cormorant font-normal text-brown-dark text-[22px] leading-snug">{product.name}</h3>
-          <div className="flex items-center justify-between mt-1">
-            <span className="label-upper text-beige-warm text-[11px]">{product.category}</span>
-            <span className="font-inter font-light text-brown-dark text-sm">{product.price}</span>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  )
-}
+const SCROLL_DURATION = 36
 
 export default function CollectionGrid() {
   const headingRef = useRef(null)
   const headingIn  = useInView(headingRef, { once: true, margin: '-80px' })
 
-  // Row 1: [0] sciarpa-rossa-grid | [3] borsa-verde | [2] sciarpa-arancio
-  // Row 2: [5] borsa-flatlay      | [1] sciarpa-rossa-alt | [4] borsa-cognac
-  const row1 = [products[0], products[3], products[2]]
-  const row2 = [products[5], products[1], products[4]]
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex(i => (i + 1) % products.length)
+    }, SCROLL_DURATION * 1000 / products.length)
+    return () => clearInterval(interval)
+  }, [])
+
+  const active = products[activeIndex]
 
   return (
-    <section className="bg-beige-light py-20 md:py-28 px-6 md:px-10">
-      {/* Heading */}
-      <motion.div
-        ref={headingRef}
-        initial={{ opacity: 0, y: 40 }}
-        animate={headingIn ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.9, ease }}
-        className="text-center mb-14"
-      >
-        <h2 className="font-cormorant font-light text-brown-dark text-5xl md:text-[68px] tracking-widest2 uppercase leading-none">
-          La Collezione
-        </h2>
-        <p className="label-upper text-gold mt-4 tracking-widest2">Sciarpe & Borse</p>
-      </motion.div>
+    <section className="bg-beige-light py-20 md:py-28 px-6 md:px-10 overflow-hidden">
+      <div className="max-w-screen-xl mx-auto grid md:grid-cols-[1fr_1fr] gap-12 md:gap-0 items-center">
+        {/* Left — fixed text panel */}
+        <motion.div
+          ref={headingRef}
+          initial={{ opacity: 0, y: 40 }}
+          animate={headingIn ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease }}
+        >
+          <p className="label-upper text-gold tracking-widest2 mb-4">La Collezione</p>
+          <h2 className="font-cormorant font-light text-brown-dark text-5xl md:text-[56px] leading-[1.1]">
+            Sei pezzi.<br />
+            <span className="italic text-gold">Una sola firma.</span>
+          </h2>
+          <p className="font-inter font-light text-brown-dark/70 text-base mt-6 max-w-sm leading-relaxed">
+            Sciarpe in seta organza, borse in pelle italiana. Ogni pezzo nasce a Milano, in Corso Vercelli.
+          </p>
+          <Link
+            to="/collection"
+            className="inline-block label-upper text-brown-dark border-b border-brown-dark mt-8 pb-1 tracking-widest2 hover:text-gold hover:border-gold transition-colors"
+          >
+            Scopri tutto
+          </Link>
 
-      {/* Asymmetric grid */}
-      <div className="max-w-screen-xl mx-auto">
-        {/* Row 1 — 1fr 1.5fr 1fr */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr_1fr] gap-4 md:gap-6 mb-4 md:mb-6">
-          {row1.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}
-        </div>
-        {/* Row 2 — 1.5fr 1fr 1fr */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-4 md:gap-6">
-          {row2.map((p, i) => <ProductCard key={p.id} product={p} index={i + 3} />)}
+          <div className="flex items-center gap-4 mt-16 pt-6 border-t border-brown-dark/15 max-w-sm">
+            <div>
+              <p className="font-cormorant text-brown-dark text-lg">{active.name}</p>
+              <p className="label-upper text-beige-warm text-[11px] mt-1">{active.category}</p>
+            </div>
+            <span className="font-inter font-light text-brown-dark/50 text-sm ml-auto">
+              {String(activeIndex + 1).padStart(2, '0')} / {String(products.length).padStart(2, '0')}
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Right — auto-scrolling products on transparent background */}
+        <div className="relative h-[640px] md:h-[760px] overflow-hidden">
+          <motion.div
+            className="flex flex-col gap-10"
+            animate={{ y: ['0%', '-50%'] }}
+            transition={{ duration: SCROLL_DURATION, repeat: Infinity, ease: 'linear' }}
+          >
+            {[0, 1].map(loop => (
+              <div key={loop} aria-hidden={loop === 1} className="flex flex-col gap-10">
+                {products.map((p, i) => (
+                  <div
+                    key={`${loop}-${p.id}`}
+                    className={`flex items-center justify-center ${i % 2 === 1 ? 'self-end' : 'self-start'}`}
+                    style={{ width: '70%' }}
+                  >
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-auto object-contain drop-shadow-xl"
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
