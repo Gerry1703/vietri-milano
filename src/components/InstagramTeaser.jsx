@@ -66,10 +66,10 @@ export default function InstagramTeaser() {
           transition={{ duration: 0.9, ease }}
           className="flex items-baseline gap-3 mb-6 md:mb-8"
         >
-          <h2 className="label-upper text-cream text-sm tracking-widest3">
-            FOLLOW
+          <h2 className="label-upper text-cream tracking-widest3 text-2xl md:text-4xl">
+            FOLLOW US
           </h2>
-          <span className="label-upper text-cream text-sm tracking-widest3">
+          <span className="label-upper text-gold tracking-widest3 text-2xl md:text-4xl">
             @vietrimilano
           </span>
         </motion.div>
