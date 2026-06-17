@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brown-dark':  '#2C1A0E',
-        'brown-mid':   '#4A2C1A',
+        'brown-dark':  '#6E5F4E',
+        'brown-mid':   '#8C7B66',
         'beige-light': '#F4F0E7',
         'beige-warm':  '#E8D9C5',
         cream:         '#F4F0E7',
