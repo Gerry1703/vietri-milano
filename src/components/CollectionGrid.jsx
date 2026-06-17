@@ -19,7 +19,7 @@ export default function CollectionGrid() {
       <img
         src={collectionHero}
         alt="La Collezione VIETRI"
-        className="absolute inset-0 w-full h-full object-cover object-top"
+        className="absolute inset-0 w-full h-full object-cover object-bottom"
       />
 
       {/* Gradient overlay — darkens left side for text readability */}
