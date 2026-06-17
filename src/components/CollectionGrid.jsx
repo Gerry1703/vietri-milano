@@ -22,8 +22,8 @@ export default function CollectionGrid() {
   const active = products[activeIndex]
 
   return (
-    <section className="bg-beige-light py-20 md:py-28 px-6 md:px-10 overflow-hidden">
-      <div className="max-w-screen-xl mx-auto grid md:grid-cols-[1fr_1fr] gap-12 md:gap-0 items-center">
+    <section className="bg-beige-light min-h-screen px-6 md:px-10 overflow-hidden">
+      <div className="max-w-screen-xl mx-auto grid md:grid-cols-[1fr_1fr] gap-12 md:gap-0 items-center min-h-screen">
         {/* Left — fixed text panel */}
         <motion.div
           ref={headingRef}
@@ -58,7 +58,7 @@ export default function CollectionGrid() {
         </motion.div>
 
         {/* Right — auto-scrolling products on transparent background */}
-        <div className="relative h-[640px] md:h-[760px] overflow-hidden">
+        <div className="relative h-screen overflow-hidden">
           <motion.div
             className="flex flex-col gap-10"
             animate={{ y: ['0%', '-50%'] }}
@@ -70,7 +70,7 @@ export default function CollectionGrid() {
                   <div
                     key={`${loop}-${p.id}`}
                     className={`flex items-center justify-center ${i % 2 === 1 ? 'self-end' : 'self-start'}`}
-                    style={{ width: '70%' }}
+                    style={{ width: '85%' }}
                   >
                     <img
                       src={p.image}
