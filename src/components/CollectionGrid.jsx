@@ -22,8 +22,8 @@ export default function CollectionGrid() {
         className="absolute inset-0 w-full h-full object-cover object-bottom"
       />
 
-      {/* Gradient overlay — darkens left side for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
+      {/* Gradient overlay — light on left since cave is already dark there */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
 
       {/* Content — left aligned, vertically centered */}
       <div className="relative z-10 flex items-center h-full px-10 md:px-20">
