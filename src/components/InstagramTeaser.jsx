@@ -66,10 +66,10 @@ export default function InstagramTeaser() {
           transition={{ duration: 0.9, ease }}
           className="flex items-baseline gap-3 mb-6 md:mb-8"
         >
-          <h2 className="font-cormorant font-light text-cream text-3xl md:text-5xl">
+          <h2 className="font-cormorant font-light uppercase text-cream text-3xl md:text-5xl">
             Follow us
           </h2>
-          <span className="font-cormorant font-light italic text-gold text-3xl md:text-5xl">
+          <span className="font-cormorant font-light italic uppercase text-gold text-3xl md:text-5xl">
             @vietrimilano
           </span>
         </motion.div>
