@@ -6,9 +6,9 @@ export default {
       colors: {
         'brown-dark':  '#3E2A1E',
         'brown-mid':   '#7E5B4E',
-        'beige-light': '#F2E2C4',
-        'beige-warm':  '#D6C3A4',
-        cream:         '#F2E2C4',
+        'beige-light': '#FFFFFF',
+        'beige-warm':  '#F2E2C4',
+        cream:         '#FFFFFF',
         gold:          '#B59C78',
       },
       fontFamily: {
