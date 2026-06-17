@@ -17,7 +17,7 @@ export default function StoreBanner() {
     >
       {/* Animated word-by-word heading */}
       <h2
-        className="font-cormorant font-light text-brown-dark uppercase tracking-[0.2em] flex flex-wrap justify-center gap-x-5 gap-y-2"
+        className="font-cormorant font-light text-beige-light uppercase tracking-[0.2em] flex flex-wrap justify-center gap-x-5 gap-y-2"
         style={{ fontSize: 'clamp(40px, 6vw, 80px)' }}
       >
         {words.map((word, i) => (

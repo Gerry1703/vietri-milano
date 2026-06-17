@@ -66,7 +66,7 @@ export default function InstagramTeaser() {
           transition={{ duration: 0.9, ease }}
           className="flex items-baseline gap-3 mb-6 md:mb-8"
         >
-          <h2 className="font-cormorant font-light uppercase text-brown-dark text-3xl md:text-5xl">
+          <h2 className="font-cormorant font-light uppercase text-beige-light text-3xl md:text-5xl">
             Follow us
           </h2>
           <span className="font-cormorant font-light italic uppercase text-gold text-3xl md:text-5xl">
@@ -135,7 +135,7 @@ export default function InstagramTeaser() {
           href="https://instagram.com/vietrimilano"
           target="_blank"
           rel="noopener noreferrer"
-          className="label-upper text-brown-dark/80 hover:text-brown-dark tracking-widest2 underline underline-offset-4 transition-colors"
+          className="label-upper text-beige-light/80 hover:text-beige-light tracking-widest2 underline underline-offset-4 transition-colors"
         >
           Vedi tutto
         </a>
@@ -149,7 +149,7 @@ export default function InstagramTeaser() {
         className="mt-6 md:mt-8 flex items-center justify-center gap-[0.3em] select-none w-full"
       >
         <span
-          className="font-cormorant font-light text-brown-dark uppercase tracking-widest2 leading-none whitespace-nowrap"
+          className="font-cormorant font-light text-beige-light uppercase tracking-widest2 leading-none whitespace-nowrap"
           style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
         >
           GERARDO
@@ -159,10 +159,10 @@ export default function InstagramTeaser() {
           src={gvLogo}
           alt="GV"
           className="w-auto select-none"
-          style={{ height: 'clamp(32px, 8.8vw, 158px)' }}
+          style={{ height: 'clamp(32px, 8.8vw, 158px)', filter: 'invert(1)' }}
         />
         <span
-          className="font-cormorant font-light text-brown-dark uppercase tracking-widest2 leading-none whitespace-nowrap"
+          className="font-cormorant font-light text-beige-light uppercase tracking-widest2 leading-none whitespace-nowrap"
           style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
         >
           VIETRI

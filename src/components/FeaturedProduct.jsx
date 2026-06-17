@@ -39,17 +39,17 @@ export default function FeaturedProduct({ onAddToCart }) {
       >
         <span className="label-upper text-gold tracking-widest2 mb-4">{p.category}</span>
 
-        <h2 className="font-cormorant font-semibold text-brown-dark leading-none tracking-widest2 text-4xl md:text-[52px] mb-4">
+        <h2 className="font-cormorant font-semibold text-beige-light leading-none tracking-widest2 text-4xl md:text-[52px] mb-4">
           {p.name}
         </h2>
 
-        <p className="label-upper text-brown-dark/50 mb-6 tracking-widest2">{p.material}</p>
+        <p className="label-upper text-beige-light/50 mb-6 tracking-widest2">{p.material}</p>
 
-        <p className="font-cormorant font-light italic text-brown-dark text-xl md:text-[22px] leading-[1.8] mb-8 max-w-sm">
+        <p className="font-cormorant font-light italic text-beige-light text-xl md:text-[22px] leading-[1.8] mb-8 max-w-sm">
           {p.description}
         </p>
 
-        <p className="font-inter font-normal text-brown-dark text-2xl mb-10">{p.price}</p>
+        <p className="font-inter font-normal text-beige-light text-2xl mb-10">{p.price}</p>
 
         <div className="flex flex-col sm:flex-row gap-4">
           <button
@@ -61,7 +61,7 @@ export default function FeaturedProduct({ onAddToCart }) {
           {/* TODO: connect to Shopify Storefront API addToCart() */}
         </div>
 
-        <button className="mt-6 label-upper text-brown-dark/50 hover:text-gold transition-colors duration-300 self-start tracking-widest2">
+        <button className="mt-6 label-upper text-beige-light/50 hover:text-gold transition-colors duration-300 self-start tracking-widest2">
           Vedi i Dettagli →
         </button>
       </motion.div>
