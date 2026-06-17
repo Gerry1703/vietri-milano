@@ -5,34 +5,31 @@ const ease = [0.22, 1, 0.36, 1]
 
 const materials = [
   {
-    label: 'Seta Pura',
-    desc: 'Tessuta a mano in Italia',
+    label: 'Da oltre 50 anni',
+    desc: 'Esperienza nel settore',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" className="w-10 h-10">
-        <path d="M20 4 C10 10, 10 30, 20 36 C30 30, 30 10, 20 4Z" />
-        <path d="M8 15 C14 18, 26 18, 32 15" />
-        <path d="M8 25 C14 22, 26 22, 32 25" />
+        <circle cx="20" cy="20" r="14" />
+        <path d="M20 12 L20 20 L26 24" />
       </svg>
     ),
   },
   {
-    label: 'Pelle Italiana',
-    desc: 'Concia naturale, grana a mano',
+    label: 'Prima Qualità',
+    desc: 'Materiali pregiati e selezionati',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" className="w-10 h-10">
-        <rect x="6" y="12" width="28" height="18" rx="2" />
-        <path d="M6 18 L34 18" />
-        <path d="M14 18 L14 30" />
-        <circle cx="20" cy="15" r="2" />
+        <path d="M20 6 L23.5 15 L33 15 L25.5 21 L28.5 31 L20 25 L11.5 31 L14.5 21 L7 15 L16.5 15 Z" />
       </svg>
     ),
   },
   {
-    label: 'Fatto a Mano',
-    desc: 'Ogni pezzo è unico',
+    label: 'Based in Milan',
+    desc: 'Corso Vercelli, Milano',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" className="w-10 h-10">
-        <path d="M20 8 L22 16 L30 16 L24 21 L26 30 L20 25 L14 30 L16 21 L10 16 L18 16 Z" />
+        <path d="M20 34 C20 34, 30 24, 30 16 A10 10 0 1 0 10 16 C10 24, 20 34, 20 34 Z" />
+        <circle cx="20" cy="16" r="3.5" />
       </svg>
     ),
   },
