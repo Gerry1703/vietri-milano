@@ -3,13 +3,13 @@ import sciarpaRossaGrid from '@/assets/images/scarves/sciarpa-rossa-grid.png'
 import venezia2         from '@/assets/images/scarves/venezia-2.png'
 import venezia3         from '@/assets/images/scarves/venezia-3.png'
 import venezia4         from '@/assets/images/scarves/venezia-4.png'
-import sciarpaRossaAlt  from '@/assets/images/scarves/sciarpa-rossa-alt.jpg'
-import sciarpaArancio   from '@/assets/images/scarves/sciarpa-arancio.jpg'
+import sciarpaRossaAlt  from '@/assets/images/scarves/sciarpa-rossa-alt.png'
+import sciarpaArancio   from '@/assets/images/scarves/sciarpa-arancio.png'
 import sciarpaVietri    from '@/assets/images/scarves/sciarpa-vietri.png'
 import borsaVerde       from '@/assets/images/bags/borsa-verde.png'
 import borsaCognac      from '@/assets/images/bags/borsa-cognac.jpg'
 import borsaBrera       from '@/assets/images/bags/borsa-brera.png'
-import borsaFlatlay     from '@/assets/images/bags/borsa-flatlay.jpg'
+import borsaFlatlay     from '@/assets/images/bags/borsa-flatlay.png'
 
 export const products = [
   {
