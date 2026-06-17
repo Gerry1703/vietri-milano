@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --brown-dark:  #2C1A0E;
-  --brown-mid:   #4A2C1A;
-  --beige-light: #F4F0E7;
-  --beige-warm:  #E8D9C5;
-  --cream:       #F4F0E7;
-  --gold-accent: #B8975A;
+  --brown-dark:  #3E2A1E;
+  --brown-mid:   #7E5B4E;
+  --beige-light: #F2E2C4;
+  --beige-warm:  #D6C3A4;
+  --cream:       #F2E2C4;
+  --gold-accent: #B59C78;
 }
 
 @layer base {

@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brown-dark':  '#6E5F4E',
-        'brown-mid':   '#8C7B66',
-        'beige-light': '#F4F0E7',
-        'beige-warm':  '#E8D9C5',
-        cream:         '#F4F0E7',
-        gold:          '#B8975A',
+        'brown-dark':  '#3E2A1E',
+        'brown-mid':   '#7E5B4E',
+        'beige-light': '#F2E2C4',
+        'beige-warm':  '#D6C3A4',
+        cream:         '#F2E2C4',
+        gold:          '#B59C78',
       },
       fontFamily: {
         cormorant: ['"Cormorant Garamond"', 'serif'],
