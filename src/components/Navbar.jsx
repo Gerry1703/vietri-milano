@@ -25,11 +25,13 @@ export default function Navbar({ onCartOpen, cartCount }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const textClass = useDarkText
+  const lightSurface = useDarkText || scrolled || isProductPage
+
+  const textClass = lightSurface
     ? 'text-brown-dark/80 hover:text-brown-dark'
     : 'text-cream/80 hover:text-cream'
 
-  const wordmarkClass = useDarkText ? 'text-brown-dark' : 'text-cream'
+  const wordmarkClass = lightSurface ? 'text-brown-dark' : 'text-cream'
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
         transition={{ duration: 0.8, ease }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled || isProductPage
-            ? 'bg-[rgba(44,26,14,0.95)] backdrop-blur-[12px]'
+            ? 'bg-beige-light/90 backdrop-blur-[12px]'
             : useDarkText
               ? 'bg-beige-light/80 backdrop-blur-[8px]'
               : 'bg-transparent'
@@ -112,11 +114,11 @@ export default function Navbar({ onCartOpen, cartCount }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease }}
-            className="fixed inset-0 z-[60] bg-brown-dark flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[60] bg-beige-warm flex flex-col items-center justify-center"
           >
             <button
               onClick={() => setMenuOpen(false)}
-              className="absolute top-6 right-6 text-cream/60 hover:text-cream transition-colors"
+              className="absolute top-6 right-6 text-brown-dark/60 hover:text-brown-dark transition-colors"
               aria-label="Chiudi menu"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -135,7 +137,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
                   <Link
                     to={l.to}
                     onClick={() => setMenuOpen(false)}
-                    className="font-cormorant font-light text-cream text-4xl tracking-widest2 hover:text-gold transition-colors duration-300"
+                    className="font-cormorant font-light text-brown-dark text-4xl tracking-widest2 hover:text-gold transition-colors duration-300"
                   >
                     {l.label}
                   </Link>
@@ -147,7 +149,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5, ease }}
-              className="absolute bottom-10 label-upper text-cream/40"
+              className="absolute bottom-10 label-upper text-brown-dark/40"
             >
               Corso Vercelli, Milano
             </motion.p>
