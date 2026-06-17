@@ -61,17 +61,18 @@ export default function CollectionGrid() {
         <div className="relative h-screen overflow-hidden flex gap-6">
           {[0, 1].map(col => {
             const colProducts = products.filter((_, i) => i % 2 === col)
-            const offset = col === 1 ? '-15%' : '0%'
             return (
               <div key={col} className="flex-1 relative overflow-hidden">
                 <motion.div
-                  className="flex flex-col gap-6"
-                  style={{ marginTop: offset }}
+                  className="flex flex-col"
+                  style={{ marginTop: col === 1 ? '9rem' : '0rem' }}
                   animate={{ y: ['0%', '-50%'] }}
-                  transition={{ duration: SCROLL_DURATION + col * 4, repeat: Infinity, ease: 'linear' }}
+                  transition={{ duration: SCROLL_DURATION + col * 6, repeat: Infinity, ease: 'linear' }}
                 >
+                  {/* Two identical sets stacked seamlessly. Each set carries its
+                      own trailing gap (pb-10) so -50% lands pixel-perfect. */}
                   {[0, 1].map(loop => (
-                    <div key={loop} aria-hidden={loop === 1} className="flex flex-col gap-6">
+                    <div key={loop} aria-hidden={loop === 1} className="flex flex-col gap-10 pb-10">
                       {colProducts.map(p => (
                         <div key={`${loop}-${p.id}`} className="w-full">
                           <img
@@ -87,6 +88,10 @@ export default function CollectionGrid() {
               </div>
             )
           })}
+
+          {/* Top & bottom fade — products dissolve into the page background */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-40 md:h-56 bg-gradient-to-b from-beige-light to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 md:h-56 bg-gradient-to-t from-beige-light to-transparent z-10" />
         </div>
       </div>
     </section>
