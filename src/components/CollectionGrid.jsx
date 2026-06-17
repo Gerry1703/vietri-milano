@@ -57,31 +57,36 @@ export default function CollectionGrid() {
           </div>
         </motion.div>
 
-        {/* Right — auto-scrolling products on transparent background */}
-        <div className="relative h-screen overflow-hidden">
-          <motion.div
-            className="flex flex-col gap-10"
-            animate={{ y: ['0%', '-50%'] }}
-            transition={{ duration: SCROLL_DURATION, repeat: Infinity, ease: 'linear' }}
-          >
-            {[0, 1].map(loop => (
-              <div key={loop} aria-hidden={loop === 1} className="flex flex-col gap-10">
-                {products.map((p, i) => (
-                  <div
-                    key={`${loop}-${p.id}`}
-                    className={`flex items-center justify-center ${i % 2 === 1 ? 'self-end' : 'self-start'}`}
-                    style={{ width: '85%' }}
-                  >
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="w-full h-auto object-contain drop-shadow-xl"
-                    />
-                  </div>
-                ))}
+        {/* Right — two-column auto-scrolling products */}
+        <div className="relative h-screen overflow-hidden flex gap-6">
+          {[0, 1].map(col => {
+            const colProducts = products.filter((_, i) => i % 2 === col)
+            const offset = col === 1 ? '-15%' : '0%'
+            return (
+              <div key={col} className="flex-1 relative overflow-hidden">
+                <motion.div
+                  className="flex flex-col gap-6"
+                  style={{ marginTop: offset }}
+                  animate={{ y: ['0%', '-50%'] }}
+                  transition={{ duration: SCROLL_DURATION + col * 4, repeat: Infinity, ease: 'linear' }}
+                >
+                  {[0, 1].map(loop => (
+                    <div key={loop} aria-hidden={loop === 1} className="flex flex-col gap-6">
+                      {colProducts.map(p => (
+                        <div key={`${loop}-${p.id}`} className="w-full">
+                          <img
+                            src={p.image}
+                            alt={p.name}
+                            className="w-full h-auto object-contain drop-shadow-xl"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </motion.div>
               </div>
-            ))}
-          </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>
