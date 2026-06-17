@@ -58,7 +58,7 @@ export default function InstagramTeaser() {
   }
 
   return (
-    <section ref={ref} className="bg-brown-dark min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-8 md:py-10 overflow-hidden">
+    <section ref={ref} className="bg-beige-warm min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-8 md:py-10 overflow-hidden">
       <div className="px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -66,7 +66,7 @@ export default function InstagramTeaser() {
           transition={{ duration: 0.9, ease }}
           className="flex items-baseline gap-3 mb-6 md:mb-8"
         >
-          <h2 className="font-cormorant font-light uppercase text-cream text-3xl md:text-5xl">
+          <h2 className="font-cormorant font-light uppercase text-brown-dark text-3xl md:text-5xl">
             Follow us
           </h2>
           <span className="font-cormorant font-light italic uppercase text-gold text-3xl md:text-5xl">
@@ -108,7 +108,7 @@ export default function InstagramTeaser() {
           <button
             onClick={() => scrollBy(1)}
             aria-label="Scorri a destra"
-            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-cream/95 hover:bg-cream text-brown-dark transition-all duration-300 z-10"
+            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-brown-dark/95 hover:bg-brown-dark text-beige-warm transition-all duration-300 z-10"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 6 15 12 9 18" />
@@ -121,7 +121,7 @@ export default function InstagramTeaser() {
           <button
             onClick={() => scrollBy(-1)}
             aria-label="Scorri a sinistra"
-            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-cream/95 hover:bg-cream text-brown-dark transition-all duration-300 z-10"
+            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-brown-dark/95 hover:bg-brown-dark text-beige-warm transition-all duration-300 z-10"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 6 9 12 15 18" />
@@ -135,7 +135,7 @@ export default function InstagramTeaser() {
           href="https://instagram.com/vietrimilano"
           target="_blank"
           rel="noopener noreferrer"
-          className="label-upper text-cream/80 hover:text-cream tracking-widest2 underline underline-offset-4 transition-colors"
+          className="label-upper text-brown-dark/80 hover:text-brown-dark tracking-widest2 underline underline-offset-4 transition-colors"
         >
           Vedi tutto
         </a>
@@ -149,20 +149,20 @@ export default function InstagramTeaser() {
         className="mt-6 md:mt-8 flex items-center justify-center gap-[0.3em] select-none w-full"
       >
         <span
-          className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none whitespace-nowrap"
+          className="font-cormorant font-light text-brown-dark uppercase tracking-widest2 leading-none whitespace-nowrap"
           style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
         >
           GERARDO
         </span>
-        {/* GV monogram logo (inverted to cream on dark bg) */}
+        {/* GV monogram logo (dark on light beige bg) */}
         <img
           src={gvLogo}
           alt="GV"
           className="w-auto select-none"
-          style={{ height: 'clamp(32px, 8.8vw, 158px)', filter: 'invert(1)' }}
+          style={{ height: 'clamp(32px, 8.8vw, 158px)' }}
         />
         <span
-          className="font-cormorant font-light text-cream uppercase tracking-widest2 leading-none whitespace-nowrap"
+          className="font-cormorant font-light text-brown-dark uppercase tracking-widest2 leading-none whitespace-nowrap"
           style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
         >
           VIETRI

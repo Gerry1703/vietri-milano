@@ -25,12 +25,12 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease }}
-            className="fixed top-0 right-0 bottom-0 z-[80] w-full max-w-sm bg-brown-dark flex flex-col"
+            className="fixed top-0 right-0 bottom-0 z-[80] w-full max-w-sm bg-beige-warm flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-8 py-6 border-b border-cream/10">
-              <h2 className="label-upper text-cream tracking-widest2">Carrello</h2>
-              <button onClick={onClose} className="text-cream/60 hover:text-cream transition-colors">
+            <div className="flex items-center justify-between px-8 py-6 border-b border-brown-dark/10">
+              <h2 className="label-upper text-brown-dark tracking-widest2">Carrello</h2>
+              <button onClick={onClose} className="text-brown-dark/60 hover:text-brown-dark transition-colors">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -40,7 +40,7 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
             {/* Items */}
             <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
               {items.length === 0 ? (
-                <p className="font-cormorant font-light italic text-cream/50 text-lg text-center mt-10">
+                <p className="font-cormorant font-light italic text-brown-dark/50 text-lg text-center mt-10">
                   Il carrello è vuoto.
                 </p>
               ) : (
@@ -50,23 +50,23 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-cormorant font-normal text-cream text-lg leading-tight">{item.name}</p>
-                      <p className="label-upper text-cream/50 text-[10px] mt-1">{item.material}</p>
+                      <p className="font-cormorant font-normal text-brown-dark text-lg leading-tight">{item.name}</p>
+                      <p className="label-upper text-brown-dark/50 text-[10px] mt-1">{item.material}</p>
                       <p className="font-inter font-light text-gold text-sm mt-1">{item.price}</p>
 
                       <div className="flex items-center gap-3 mt-2">
                         <button
                           onClick={() => onUpdateQty(item.id, item.qty - 1)}
-                          className="w-6 h-6 border border-cream/20 text-cream/60 hover:text-cream text-xs flex items-center justify-center transition-colors"
+                          className="w-6 h-6 border border-brown-dark/20 text-brown-dark/60 hover:text-brown-dark text-xs flex items-center justify-center transition-colors"
                         >−</button>
-                        <span className="font-inter font-light text-cream text-sm w-4 text-center">{item.qty}</span>
+                        <span className="font-inter font-light text-brown-dark text-sm w-4 text-center">{item.qty}</span>
                         <button
                           onClick={() => onUpdateQty(item.id, item.qty + 1)}
-                          className="w-6 h-6 border border-cream/20 text-cream/60 hover:text-cream text-xs flex items-center justify-center transition-colors"
+                          className="w-6 h-6 border border-brown-dark/20 text-brown-dark/60 hover:text-brown-dark text-xs flex items-center justify-center transition-colors"
                         >+</button>
                         <button
                           onClick={() => onRemove(item.id)}
-                          className="ml-auto text-cream/30 hover:text-cream/70 transition-colors text-xs label-upper"
+                          className="ml-auto text-brown-dark/30 hover:text-brown-dark/70 transition-colors text-xs label-upper"
                         >
                           Rimuovi
                         </button>
@@ -79,10 +79,10 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="px-8 py-6 border-t border-cream/10">
+              <div className="px-8 py-6 border-t border-brown-dark/10">
                 <div className="flex justify-between mb-6">
-                  <span className="label-upper text-cream/60 tracking-widest2">Totale</span>
-                  <span className="font-cormorant font-light text-cream text-xl">
+                  <span className="label-upper text-brown-dark/60 tracking-widest2">Totale</span>
+                  <span className="font-cormorant font-light text-brown-dark text-xl">
                     € {total.toLocaleString('it-IT', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
