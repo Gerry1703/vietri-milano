@@ -18,15 +18,6 @@ export default function ParallaxBreak() {
       </motion.div>
 
       <div className="absolute inset-0 bg-black/45" />
-
-      <div className="relative z-10 flex items-center justify-center h-full">
-        <h2
-          className="font-cormorant font-light text-cream uppercase tracking-[0.3em] text-center"
-          style={{ fontSize: 'clamp(40px, 6vw, 80px)' }}
-        >
-          Fatto in Italia
-        </h2>
-      </div>
     </section>
   )
 }
