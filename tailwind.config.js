@@ -7,7 +7,7 @@ export default {
         'brown-dark':  '#3B2415',
         'brown-mid':   '#6E4B2A',
         'beige-light': '#FFFFFF',
-        'beige-warm':  '#F2E2C4',
+        'beige-warm':  '#9C5B34',
         cream:         '#FFFFFF',
         gold:          '#9C5B34',
       },

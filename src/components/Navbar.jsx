@@ -118,7 +118,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
           >
             <button
               onClick={() => setMenuOpen(false)}
-              className="absolute top-6 right-6 text-brown-dark/60 hover:text-brown-dark transition-colors"
+              className="absolute top-6 right-6 text-beige-light/60 hover:text-beige-light transition-colors"
               aria-label="Chiudi menu"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -137,7 +137,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
                   <Link
                     to={l.to}
                     onClick={() => setMenuOpen(false)}
-                    className="font-cormorant font-light text-brown-dark text-4xl tracking-widest2 hover:text-gold transition-colors duration-300"
+                    className="font-cormorant font-light text-beige-light text-4xl tracking-widest2 hover:text-gold transition-colors duration-300"
                   >
                     {l.label}
                   </Link>
@@ -149,7 +149,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5, ease }}
-              className="absolute bottom-10 label-upper text-brown-dark/40"
+              className="absolute bottom-10 label-upper text-beige-light/40"
             >
               Corso Vercelli, Milano
             </motion.p>

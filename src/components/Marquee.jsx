@@ -15,7 +15,7 @@ export default function Marquee() {
           <span
             key={i}
             aria-hidden={i === 1}
-            className="inline-block label-upper text-brown-dark tracking-widest2"
+            className="inline-block label-upper text-beige-light tracking-widest2"
           >
             {text.repeat(6)}
           </span>
