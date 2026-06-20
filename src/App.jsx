@@ -29,7 +29,9 @@ export default function App() {
 
   return (
     <>
-      <Navbar onCartOpen={() => setIsOpen(true)} cartCount={count} />
+      {location.pathname !== '/collection' && (
+        <Navbar onCartOpen={() => setIsOpen(true)} cartCount={count} />
+      )}
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
