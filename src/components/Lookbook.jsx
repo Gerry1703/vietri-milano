@@ -1,17 +1,17 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 /* Venezia — red */
-import veneziaModel  from '@/assets/images/scarves/venezia-2.png'
-import veneziaFlat   from '@/assets/images/scarves/venezia-3.png'
-import veneziaDetail from '@/assets/images/scarves/venezia-4.png'
+import veneziaModel  from '@/assets/images/scarves/venezia-2.jpg'
+import veneziaFlat   from '@/assets/images/scarves/venezia-3.jpg'
+import veneziaDetail from '@/assets/images/scarves/venezia-4.jpg'
 /* Capri — blue */
-import capriModel    from '@/assets/images/scarves/capri-model.png'
-import capriFlat     from '@/assets/images/scarves/capri-flat.png'
-import capriDetail   from '@/assets/images/scarves/capri-detail.png'
+import capriModel    from '@/assets/images/scarves/capri-model.jpg'
+import capriFlat     from '@/assets/images/scarves/capri-flat.jpg'
+import capriDetail   from '@/assets/images/scarves/capri-detail.jpg'
 /* Ravello — sage green */
-import ravelloModel  from '@/assets/images/scarves/ravello-model.png'
-import ravelloFlat   from '@/assets/images/scarves/ravello-flat.png'
-import ravelloDetail from '@/assets/images/scarves/ravello-detail.png'
+import ravelloModel  from '@/assets/images/scarves/ravello-model.jpg'
+import ravelloFlat   from '@/assets/images/scarves/ravello-flat.jpg'
+import ravelloDetail from '@/assets/images/scarves/ravello-detail.jpg'
 
 const ease = [0.22, 1, 0.36, 1]
 
