@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import sciarpaRossaAlt  from '@/assets/images/scarves/sciarpa-rossa-alt.png'
 import sciarpaRossaGrid from '@/assets/images/scarves/sciarpa-rossa-grid.png'
@@ -26,147 +26,82 @@ const tiles = [
 ]
 
 export default function InstagramTeaser() {
-  const ref      = useRef(null)
-  const scroller = useRef(null)
-  const inView   = useInView(ref, { once: true, margin: '-80px' })
-  const [canLeft, setCanLeft]   = useState(false)
-  const [canRight, setCanRight] = useState(true)
-
-  const updateArrows = () => {
-    const el = scroller.current
-    if (!el) return
-    setCanLeft(el.scrollLeft > 4)
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
-  }
-
-  useEffect(() => {
-    updateArrows()
-    const el = scroller.current
-    if (!el) return
-    el.addEventListener('scroll', updateArrows, { passive: true })
-    window.addEventListener('resize', updateArrows)
-    return () => {
-      el.removeEventListener('scroll', updateArrows)
-      window.removeEventListener('resize', updateArrows)
-    }
-  }, [])
-
-  const scrollBy = (dir) => {
-    const el = scroller.current
-    if (!el) return
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' })
-  }
+  const ref    = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} className="bg-beige-warm min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] md:h-[calc(100vh-5rem)] flex flex-col justify-between py-8 md:py-10 overflow-hidden">
+    <section
+      ref={ref}
+      data-nav-theme="light"
+      className="relative min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] flex flex-col justify-between py-12 md:py-16 overflow-hidden"
+      style={{ background: '#FFFFFF' }}
+    >
+      {/* Header — minimal: one small handle, one line */}
       <div className="px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease }}
-          className="flex items-baseline gap-3 mb-6 md:mb-8"
         >
-          <h2 className="font-cormorant font-light uppercase text-beige-light text-3xl md:text-5xl">
-            Follow us
-          </h2>
-          <span className="font-cormorant font-light italic uppercase text-gold text-3xl md:text-5xl">
-            @vietrimilano
-          </span>
+          <p className="label-upper text-gold/70 tracking-widest3 text-xs">@vietrimilano</p>
         </motion.div>
       </div>
 
-      <div className="relative flex items-end min-h-0">
-        {/* Carousel */}
-        <div
-          ref={scroller}
-          className="w-full flex gap-3 md:gap-4 overflow-x-auto pl-6 md:pl-10 pr-6 md:pr-10 snap-x snap-mandatory"
-          style={{ scrollbarWidth: 'none' }}
-        >
-          {tiles.map((tile, i) => (
-            <motion.a
-              key={i}
-              href="https://instagram.com/vietrimilano"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.9, delay: i * 0.08, ease }}
-              className="flex-shrink-0 snap-start relative overflow-hidden group bg-[#1a1008]"
-              style={{ aspectRatio: '3/4', height: 'clamp(160px, 42vh, 400px)' }}
-            >
-              <img
-                src={tile.src}
-                alt={tile.alt}
-                className="w-full h-full object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.05]"
-              />
-            </motion.a>
-          ))}
-        </div>
-
-        {/* Right arrow */}
-        {canRight && (
-          <button
-            onClick={() => scrollBy(1)}
-            aria-label="Scorri a destra"
-            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-brown-dark/95 hover:bg-brown-dark text-beige-warm transition-all duration-300 z-10"
+      {/* Carousel — images on white, scroll only, no frames */}
+      <div
+        className="w-full flex gap-6 md:gap-10 overflow-x-auto pl-6 md:pl-10 pr-6 md:pr-10 snap-x snap-mandatory"
+        style={{ scrollbarWidth: 'none' }}
+      >
+        {tiles.map((tile, i) => (
+          <motion.a
+            key={i}
+            href="https://instagram.com/vietrimilano"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: i * 0.08, ease }}
+            className="flex-shrink-0 snap-start relative overflow-hidden group"
+            style={{ aspectRatio: '4/5', height: 'clamp(170px, 44vh, 420px)' }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 6 15 12 9 18" />
-            </svg>
-          </button>
-        )}
-
-        {/* Left arrow */}
-        {canLeft && (
-          <button
-            onClick={() => scrollBy(-1)}
-            aria-label="Scorri a sinistra"
-            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-brown-dark/95 hover:bg-brown-dark text-beige-warm transition-all duration-300 z-10"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 6 9 12 15 18" />
-            </svg>
-          </button>
-        )}
+            <img
+              src={tile.src}
+              alt={tile.alt}
+              className="w-full h-full object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
+            />
+          </motion.a>
+        ))}
       </div>
 
-      <div className="px-6 md:px-10 mt-4 md:mt-6">
+      {/* Single quiet CTA */}
+      <div className="px-6 md:px-10 mt-7 md:mt-9">
         <a
           href="https://instagram.com/vietrimilano"
           target="_blank"
           rel="noopener noreferrer"
-          className="label-upper text-beige-light/80 hover:text-beige-light tracking-widest2 underline underline-offset-4 transition-colors"
+          className="group inline-flex items-center gap-3 label-upper text-brown-dark/60 hover:text-brown-dark tracking-widest2 transition-colors"
         >
-          Vedi tutto
+          <span className="border-b border-brown-dark/20 group-hover:border-brown-dark pb-1 transition-colors">Vai al profilo</span>
+          <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
         </a>
       </div>
 
-      {/* Giant wordmark — fits full width with logo slot in middle */}
+      {/* Discreet GV monogram signature */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 1.2, delay: 0.3, ease }}
-        className="mt-6 md:mt-8 flex items-center justify-center gap-[0.3em] select-none w-full"
+        transition={{ duration: 1.1, delay: 0.3, ease }}
+        className="mt-10 md:mt-14 flex items-center justify-center select-none w-full"
       >
-        <span
-          className="font-cormorant font-light text-beige-light uppercase tracking-widest2 leading-none whitespace-nowrap"
-          style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
-        >
-          GERARDO
-        </span>
-        {/* GV monogram logo (dark on light beige bg) */}
         <img
           src={gvLogo}
-          alt="GV"
-          className="w-auto select-none"
-          style={{ height: 'clamp(32px, 8.8vw, 158px)', filter: 'invert(1)' }}
+          alt="Gerardo Vietri"
+          className="w-auto select-none opacity-90"
+          style={{ height: 'clamp(26px, 3.4vw, 52px)' }}
         />
-        <span
-          className="font-cormorant font-light text-beige-light uppercase tracking-widest2 leading-none whitespace-nowrap"
-          style={{ fontSize: 'clamp(24px, 7.2vw, 130px)' }}
-        >
-          VIETRI
-        </span>
       </motion.div>
     </section>
   )

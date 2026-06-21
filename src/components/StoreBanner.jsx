@@ -12,12 +12,13 @@ export default function StoreBanner() {
   return (
     <section
       ref={ref}
-      className="bg-beige-warm flex flex-col items-center justify-center text-center px-6 py-24 md:py-32"
-      style={{ minHeight: '50vh' }}
+      data-nav-theme="light"
+      className="flex flex-col items-center justify-center text-center px-6 py-24 md:py-32"
+      style={{ minHeight: '50vh', background: '#FFFFFF' }}
     >
       {/* Animated word-by-word heading */}
       <h2
-        className="font-cormorant font-light text-beige-light uppercase tracking-[0.2em] flex flex-wrap justify-center gap-x-5 gap-y-2"
+        className="font-cormorant font-light text-brown-dark uppercase tracking-[0.2em] flex flex-wrap justify-center gap-x-5 gap-y-2"
         style={{ fontSize: 'clamp(40px, 6vw, 80px)' }}
       >
         {words.map((word, i) => (

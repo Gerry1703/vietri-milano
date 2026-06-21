@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -11,40 +11,85 @@ const links = [
 ]
 
 export default function Navbar({ onCartOpen, cartCount }) {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
   const { pathname } = useLocation()
+  const isHomePage = pathname === '/'
+  const navH = 80
 
-  const isHomePage    = pathname === '/'
-  const isProductPage = pathname.startsWith('/product/')
-  const useDarkText   = !isHomePage && !isProductPage && !scrolled
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [theme, setTheme] = useState('dark')          // colour of the section under the navbar
+  const [revealed, setRevealed] = useState(!isHomePage)
+  const themeRef = useRef('dark')
 
+  // Reveal: hidden over the hero on the home page, shown once the collection has
+  // risen to (almost) touch the top. State flips only on threshold crossing —
+  // no per-frame re-render while scrolling.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
+    if (!isHomePage) { setRevealed(true); return }
+    const onScroll = () => {
+      const r = window.scrollY >= window.innerHeight - 60
+      setRevealed((prev) => (prev === r ? prev : r))
+    }
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [isHomePage])
 
-  const lightSurface = useDarkText || scrolled || isProductPage
+  // Adapt icon colour to the section under the navbar. IntersectionObserver is
+  // async and reads no layout per frame, so it doesn't stutter the scroll.
+  useEffect(() => {
+    const sections = document.querySelectorAll('[data-nav-theme]')
+    if (!sections.length) {
+      const fb = isHomePage ? themeRef.current : 'light'
+      themeRef.current = fb
+      setTheme(fb)
+      return
+    }
+    let io
+    const build = () => {
+      if (io) io.disconnect()
+      const bottom = Math.max(0, window.innerHeight - navH - 1)
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return
+            const next = e.target.getAttribute('data-nav-theme')
+            if (next !== themeRef.current) {
+              themeRef.current = next
+              setTheme(next)
+            }
+          })
+        },
+        { rootMargin: `-${navH}px 0px -${bottom}px 0px`, threshold: 0 }
+      )
+      sections.forEach((s) => io.observe(s))
+    }
+    build()
+    const onResize = () => build()
+    window.addEventListener('resize', onResize)
+    return () => {
+      if (io) io.disconnect()
+      window.removeEventListener('resize', onResize)
+    }
+  }, [isHomePage, pathname])
 
+  const lightSurface = theme === 'light'
   const textClass = lightSurface
     ? 'text-brown-dark/80 hover:text-brown-dark'
     : 'text-cream/80 hover:text-cream'
-
   const wordmarkClass = lightSurface ? 'text-brown-dark' : 'text-cream'
 
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled || isProductPage
-            ? 'bg-beige-light/90 backdrop-blur-[12px]'
-            : useDarkText
-              ? 'bg-beige-light/80 backdrop-blur-[8px]'
-              : 'bg-transparent'
+        initial={false}
+        animate={{ y: revealed ? 0 : -navH, opacity: revealed ? 1 : 0 }}
+        transition={{ duration: 0.45, ease }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 bg-transparent ${
+          revealed ? '' : 'pointer-events-none'
         }`}
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
@@ -52,19 +97,6 @@ export default function Navbar({ onCartOpen, cartCount }) {
           <Link to="/" className={`font-cormorant font-light tracking-widest4 text-xl md:text-2xl select-none transition-colors duration-300 ${wordmarkClass}`}>
             VIETRI
           </Link>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-10">
-            {links.map(l => (
-              <Link
-                key={l.label}
-                to={l.to}
-                className={`label-upper transition-colors duration-300 ${textClass}`}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
 
           {/* Icons */}
           <div className="flex items-center gap-5">
@@ -91,10 +123,10 @@ export default function Navbar({ onCartOpen, cartCount }) {
               )}
             </button>
 
-            {/* Hamburger (mobile) */}
+            {/* Menu */}
             <button
               aria-label="Menu"
-              className={`md:hidden transition-colors duration-300 ${textClass}`}
+              className={`transition-colors duration-300 ${textClass}`}
               onClick={() => setMenuOpen(true)}
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">

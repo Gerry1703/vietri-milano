@@ -17,7 +17,7 @@ export default function Newsletter() {
   }
 
   return (
-    <section ref={ref} className="bg-cream py-20 md:py-28 px-6 text-center">
+    <section ref={ref} data-nav-theme="light" className="bg-cream py-20 md:py-28 px-6 text-center">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}

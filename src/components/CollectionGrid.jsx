@@ -8,25 +8,25 @@ const ease = [0.22, 1, 0.36, 1]
 /* Staggered orchestration for the whole text block */
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.13, delayChildren: 0.35 } },
+  show: { transition: { staggerChildren: 0.22, delayChildren: 0.5 } },
 }
 
 /* Lines that rise from behind an overflow-hidden mask (luxury "curtain" reveal) */
 const maskLine = {
   hidden: { y: '115%' },
-  show:   { y: '0%', transition: { duration: 1.1, ease } },
+  show:   { y: '0%', transition: { duration: 1.7, ease } },
 }
 
 /* Soft fade-up for secondary elements */
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
+  show:   { opacity: 1, y: 0, transition: { duration: 1.5, ease } },
 }
 
 /* Gold hairline that draws from the left */
 const drawLine = {
   hidden: { scaleX: 0 },
-  show:   { scaleX: 1, transition: { duration: 1, ease, delay: 0.2 } },
+  show:   { scaleX: 1, transition: { duration: 1.6, ease, delay: 0.3 } },
 }
 
 export default function CollectionGrid() {
@@ -43,8 +43,9 @@ export default function CollectionGrid() {
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden bg-brown-dark"
-      style={{ height: 'calc(100vh - 5rem)' }}
+      data-nav-theme="dark"
+      className="relative z-10 w-full overflow-hidden bg-brown-dark"
+      style={{ height: '100vh', boxShadow: '0 -24px 60px -22px rgba(0,0,0,0.55)' }}
     >
       {/* Background — scroll parallax + slow cinematic Ken Burns zoom-in */}
       <motion.div
