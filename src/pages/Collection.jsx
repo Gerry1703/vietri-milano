@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { products } from '@/data/products'
@@ -17,6 +18,104 @@ const cardVariants = {
   exit:   { opacity: 0, y: -16, transition: { duration: 0.3 } },
 }
 
+/* One tile of the mosaic: product shot by default, on hover it crossfades to the
+   gallery and exposes ◀ ▶ arrows to browse the other photos in place. */
+function ProductCard({ p, i }) {
+  const gallery = p.gallery || []
+  const hasGallery = gallery.length > 0
+  const [idx, setIdx] = useState(0)
+
+  const step = (dir) => (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIdx((v) => (v + dir + gallery.length) % gallery.length)
+  }
+
+  return (
+    <motion.div custom={i} variants={cardVariants} initial="hidden" animate="show">
+      <Link
+        to={`/product/${p.id}`}
+        onMouseLeave={() => setIdx(0)}
+        className="group relative block w-full h-full overflow-hidden bg-beige-light cursor-pointer"
+      >
+        {/* Tag badge */}
+        {p.tag && (
+          <span className="absolute top-3 left-3 md:top-4 md:left-4 z-30 label-upper text-beige-light bg-brown-dark px-[10px] py-[5px] text-[9px] tracking-widest2">
+            {p.tag}
+          </span>
+        )}
+
+        {/* Base product shot */}
+        <img
+          src={p.image}
+          alt={p.name}
+          loading="lazy"
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[700ms] ease-out ${hasGallery ? '' : 'group-hover:scale-[1.04]'}`}
+        />
+
+        {/* Hover gallery — crossfade between shots */}
+        {hasGallery && (
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            {gallery.map((g, gi) => (
+              <img
+                key={gi}
+                src={g}
+                alt={`${p.name} — foto ${gi + 1}`}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                style={{ opacity: gi === idx ? 1 : 0, zIndex: gi === idx ? 2 : 1 }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Browse arrows — only when there is more than one photo */}
+        {gallery.length > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label="Foto precedente"
+              onClick={step(-1)}
+              className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 z-30 grid place-items-center w-8 h-8 rounded-full bg-white/70 text-brown-dark backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 6 9 12 15 18" /></svg>
+            </button>
+            <button
+              type="button"
+              aria-label="Foto successiva"
+              onClick={step(1)}
+              className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 z-30 grid place-items-center w-8 h-8 rounded-full bg-white/70 text-brown-dark backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
+            </button>
+          </>
+        )}
+
+        {/* Info — revealed on hover */}
+        <div className="absolute inset-x-0 bottom-0 z-20 px-4 md:px-6 pt-10 pb-4 md:pb-5
+                        bg-gradient-to-t from-black/65 via-black/20 to-transparent
+                        opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <h3
+            className="font-cormorant font-light text-beige-light leading-tight"
+            style={{ fontSize: 'clamp(17px, 1.5vw, 24px)' }}
+          >
+            {p.name}
+          </h3>
+          {p.color && (
+            <p className="font-cormorant italic text-beige-light/85 text-sm md:text-base mt-0.5">{p.color}</p>
+          )}
+          <div className="flex items-center justify-between mt-2 gap-3">
+            {p.material && (
+              <span className="label-upper text-beige-light/70 text-[9px] tracking-widest2">{p.material}</span>
+            )}
+            <span className="font-inter font-light text-beige-light text-[12px] md:text-[13px] ml-auto">{p.price}</span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  )
+}
+
 export default function Collection() {
   const [params, setParams] = useSearchParams()
   const cat = params.get('cat')
@@ -30,8 +129,8 @@ export default function Collection() {
   }
 
   return (
-    <main className="bg-beige-light min-h-screen pt-16 pb-24 px-6 md:px-10">
-      <div className="max-w-screen-xl mx-auto">
+    <main className="bg-beige-light min-h-screen pt-16 pb-24">
+      <div className="max-w-screen-xl mx-auto px-6 md:px-10">
 
         {/* ── Page header ── */}
         <motion.div
@@ -107,77 +206,29 @@ export default function Collection() {
           </div>
         </motion.div>
 
-        {/* ── Product grid ── */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={cat ?? 'all'}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-10 md:gap-24 max-w-5xl mx-auto"
-          >
-            {filtered.map((p, i) => (
-              <motion.div
-                key={p.id}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                animate="show"
-              >
-                <Link to={`/product/${p.id}`} className="block group cursor-pointer">
-                  {/* Image */}
-                  <div
-                    className="relative overflow-hidden"
-                    style={{ aspectRatio: '1/1', background: '#F4F0E7' }}
-                  >
-                    {/* Tag badge */}
-                    {p.tag && (
-                      <span className="absolute top-3 left-3 z-20 label-upper text-beige-light bg-brown-dark px-[10px] py-[5px] text-[9px] tracking-widest2">
-                        {p.tag}
-                      </span>
-                    )}
+      </div>
 
-                    {/* Product image with zoom */}
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-[700ms] ease-out group-hover:scale-[1.07]"
-                    />
+      {/* ── Full-bleed product mosaic ── */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={cat ?? 'all'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+                     auto-rows-[50vw] md:auto-rows-[33.333vw] lg:auto-rows-[25vw]
+                     gap-px bg-brown-dark/10"
+        >
+          {filtered.map((p, i) => (
+            <ProductCard key={p.id} p={p} i={i} />
+          ))}
+        </motion.div>
+      </AnimatePresence>
 
-                    {/* Description overlay — slides up on hover */}
-                    <div className="absolute inset-x-0 bottom-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                      <div className="bg-brown-dark/88 backdrop-blur-[2px] px-5 py-4">
-                        <p className="font-cormorant font-light text-beige-light/90 text-[14px] md:text-[15px] leading-snug italic">
-                          {p.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card footer */}
-                  <div className="pt-4 space-y-[6px]">
-                    <h3 className="font-cormorant font-normal text-brown-dark text-[19px] md:text-[22px] leading-snug transition-colors duration-300 group-hover:text-gold">
-                      {p.name}
-                    </h3>
-                    {p.material && (
-                      <p className="label-upper text-gold/65 text-[9px] tracking-widest2">{p.material}</p>
-                    )}
-                    <div className="flex justify-between items-center pt-[2px]">
-                      <span className="label-upper text-brown-dark/40 text-[10px]">{p.category}</span>
-                      <span className="font-inter font-light text-brown-dark text-[13px]">{p.price}</span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* ── Bottom decorative spacer ── */}
-        <div className="flex justify-center mt-24">
-          <span className="block h-px w-16 bg-gold/30" />
-        </div>
+      {/* ── Bottom decorative spacer ── */}
+      <div className="flex justify-center mt-20 md:mt-24">
+        <span className="block h-px w-16 bg-gold/30" />
       </div>
     </main>
   )

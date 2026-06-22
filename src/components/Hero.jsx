@@ -20,7 +20,11 @@ export default function Hero() {
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
+    // React doesn't render the `muted` HTML attribute; force it so iOS/Safari
+    // allow inline autoplay (it gates on the muted attribute being present).
     v.muted = true
+    v.defaultMuted = true
+    v.setAttribute('muted', '')
     const attempt = () => v.play().catch(() => {})
     if (v.readyState >= 3) {
       attempt()
@@ -39,6 +43,7 @@ export default function Hero() {
           ref={videoRef}
           autoPlay
           loop
+          muted
           playsInline
           preload="auto"
           className="w-full h-full object-cover object-center"
