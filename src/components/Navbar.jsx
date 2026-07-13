@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import SearchOverlay from '@/components/SearchOverlay'
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -16,27 +17,9 @@ export default function Navbar({ onCartOpen, cartCount }) {
   const navH = 80
 
   const [menuOpen, setMenuOpen] = useState(false)
-  const [theme, setTheme] = useState('dark')          // colour of the section under the navbar
-  const [revealed, setRevealed] = useState(!isHomePage)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [theme, setTheme] = useState('dark')
   const themeRef = useRef('dark')
-
-  // Reveal: hidden over the hero on the home page, shown once the collection has
-  // risen to (almost) touch the top. State flips only on threshold crossing —
-  // no per-frame re-render while scrolling.
-  useEffect(() => {
-    if (!isHomePage) { setRevealed(true); return }
-    const onScroll = () => {
-      const r = window.scrollY >= window.innerHeight - 60
-      setRevealed((prev) => (prev === r ? prev : r))
-    }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [isHomePage])
 
   // Adapt icon colour to the section under the navbar. IntersectionObserver is
   // async and reads no layout per frame, so it doesn't stutter the scroll.
@@ -84,14 +67,7 @@ export default function Navbar({ onCartOpen, cartCount }) {
 
   return (
     <>
-      <motion.nav
-        initial={false}
-        animate={{ y: revealed ? 0 : -navH, opacity: revealed ? 1 : 0 }}
-        transition={{ duration: 0.45, ease }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 bg-transparent ${
-          revealed ? '' : 'pointer-events-none'
-        }`}
-      >
+      <nav className="fixed top-0 left-0 right-0 z-50 transition-colors duration-500 bg-transparent">
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
           {/* Wordmark */}
           <Link to="/" className={`font-cormorant font-light tracking-widest4 text-xl md:text-2xl select-none transition-colors duration-300 ${wordmarkClass}`}>
@@ -100,8 +76,18 @@ export default function Navbar({ onCartOpen, cartCount }) {
 
           {/* Icons */}
           <div className="flex items-center gap-5">
+            {/* Home — solo fuori dalla home */}
+            {!isHomePage && (
+              <Link to="/" aria-label="Home" className={`transition-colors duration-300 ${textClass}`}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                  <polyline points="9 21 9 12 15 12 15 21"/>
+                </svg>
+              </Link>
+            )}
+
             {/* Search */}
-            <button aria-label="Cerca" className={`transition-colors duration-300 ${textClass}`}>
+            <button aria-label="Cerca" onClick={() => setSearchOpen(true)} className={`transition-colors duration-300 ${textClass}`}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
@@ -135,7 +121,9 @@ export default function Navbar({ onCartOpen, cartCount }) {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
+
+      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* Mobile fullscreen overlay */}
       <AnimatePresence>

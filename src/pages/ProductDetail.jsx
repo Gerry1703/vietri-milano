@@ -10,7 +10,7 @@ export default function ProductDetail({ onAddToCart }) {
 
   if (!p) {
     return (
-      <main className="bg-beige-light min-h-screen flex items-center justify-center">
+      <main className="bg-[#FFFFFF] min-h-screen flex items-center justify-center">
         <p className="font-cormorant italic text-brown-mid text-2xl">Prodotto non trovato.</p>
       </main>
     )
@@ -19,7 +19,7 @@ export default function ProductDetail({ onAddToCart }) {
   const allImages = [p.image, ...(p.gallery || [])]
 
   return (
-    <main className="bg-beige-light min-h-screen">
+    <main className="bg-[#FFFFFF] min-h-screen">
       <div className="flex flex-col md:flex-row min-h-screen pt-16 md:pt-20">
         {/* Images column — scrolls naturally */}
         <motion.div

@@ -32,11 +32,11 @@ function ProductCard({ p, i }) {
   }
 
   return (
-    <motion.div custom={i} variants={cardVariants} initial="hidden" animate="show">
+    <motion.div custom={i} variants={cardVariants} initial="hidden" animate="show" className="border-r border-b border-brown-dark/10">
       <Link
         to={`/product/${p.id}`}
         onMouseLeave={() => setIdx(0)}
-        className="group relative block w-full h-full overflow-hidden bg-beige-light cursor-pointer"
+        className="group relative block w-full h-full overflow-hidden bg-[#FFFFFF] cursor-pointer"
       >
         {/* Tag badge */}
         {p.tag && (
@@ -116,20 +116,37 @@ function ProductCard({ p, i }) {
   )
 }
 
+function matchesSearch(p, q) {
+  const s = q.toLowerCase()
+  return (
+    p.name.toLowerCase().includes(s) ||
+    p.category.toLowerCase().includes(s) ||
+    (p.material || '').toLowerCase().includes(s) ||
+    (p.color || '').toLowerCase().includes(s) ||
+    (p.description || '').toLowerCase().includes(s)
+  )
+}
+
 export default function Collection() {
   const [params, setParams] = useSearchParams()
   const cat = params.get('cat')
+  const searchQuery = params.get('search') || ''
 
-  const filtered = cat
-    ? products.filter(p => p.category.toLowerCase() === cat.toLowerCase())
-    : products
+  const filtered = products.filter(p => {
+    const catMatch = cat ? p.category.toLowerCase() === cat.toLowerCase() : true
+    const searchMatch = searchQuery ? matchesSearch(p, searchQuery) : true
+    return catMatch && searchMatch
+  })
 
   const setCategory = (value) => {
-    value ? setParams({ cat: value }) : setParams({})
+    const next = new URLSearchParams(params)
+    if (value) next.set('cat', value)
+    else next.delete('cat')
+    setParams(next)
   }
 
   return (
-    <main className="bg-beige-light min-h-screen pt-16 pb-24">
+    <main className="bg-[#FFFFFF] min-h-screen pt-16 pb-24">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10">
 
         {/* ── Page header ── */}
@@ -171,7 +188,10 @@ export default function Collection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="label-upper text-brown-dark/40 tracking-widest mt-3 text-[10px]"
           >
-            {filtered.length} {filtered.length === 1 ? 'pezzo' : 'pezzi'}
+            {searchQuery
+              ? `${filtered.length} ${filtered.length === 1 ? 'risultato' : 'risultati'} per "${searchQuery}"`
+              : `${filtered.length} ${filtered.length === 1 ? 'pezzo' : 'pezzi'}`
+            }
           </motion.p>
         </motion.div>
 
@@ -211,14 +231,14 @@ export default function Collection() {
       {/* ── Full-bleed product mosaic ── */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={cat ?? 'all'}
+          key={`${cat ?? 'all'}-${searchQuery}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4
                      auto-rows-[50vw] md:auto-rows-[33.333vw] lg:auto-rows-[25vw]
-                     gap-px bg-brown-dark/10"
+                     border-l border-t border-brown-dark/10"
         >
           {filtered.map((p, i) => (
             <ProductCard key={p.id} p={p} i={i} />

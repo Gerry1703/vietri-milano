@@ -17,7 +17,8 @@
   }
 
   body {
-    @apply bg-beige-light text-brown-dark font-inter;
+    @apply text-brown-dark font-inter;
+    background-color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
