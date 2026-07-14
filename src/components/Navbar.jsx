@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import SearchOverlay from '@/components/SearchOverlay'
@@ -18,19 +18,36 @@ export default function Navbar({ onCartOpen, cartCount }) {
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
-  const [theme, setTheme] = useState('dark')
-  const themeRef = useRef('dark')
+  const initialTheme = isHomePage ? 'dark' : 'light'
+  const [theme, setTheme] = useState(initialTheme)
+  const themeRef = useRef(initialTheme)
 
-  // Adapt icon colour to the section under the navbar. IntersectionObserver is
-  // async and reads no layout per frame, so it doesn't stutter the scroll.
+  // Reset theme synchronously before paint to avoid white-on-white flash on navigation.
+  useLayoutEffect(() => {
+    const reset = isHomePage ? 'dark' : 'light'
+    themeRef.current = reset
+    setTheme(reset)
+  }, [isHomePage, pathname])
+
+  // Set up scroll / IntersectionObserver listeners after paint.
   useEffect(() => {
-    const sections = document.querySelectorAll('[data-nav-theme]')
-    if (!sections.length) {
-      const fb = isHomePage ? themeRef.current : 'light'
-      themeRef.current = fb
-      setTheme(fb)
-      return
+    if (isHomePage) {
+      // On the home page the hero is sticky and sections overlap — scroll position
+      // is more reliable than IntersectionObserver for detecting which layer is on top.
+      const onScroll = () => {
+        const next = window.scrollY >= window.innerHeight * 0.85 ? 'light' : 'dark'
+        if (next !== themeRef.current) {
+          themeRef.current = next
+          setTheme(next)
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true })
+      return () => window.removeEventListener('scroll', onScroll)
     }
+
+    // On other pages use IntersectionObserver — no sticky overlap issues.
+    const sections = document.querySelectorAll('[data-nav-theme]')
+    if (!sections.length) return
     let io
     const build = () => {
       if (io) io.disconnect()
@@ -51,11 +68,10 @@ export default function Navbar({ onCartOpen, cartCount }) {
       sections.forEach((s) => io.observe(s))
     }
     build()
-    const onResize = () => build()
-    window.addEventListener('resize', onResize)
+    window.addEventListener('resize', build)
     return () => {
       if (io) io.disconnect()
-      window.removeEventListener('resize', onResize)
+      window.removeEventListener('resize', build)
     }
   }, [isHomePage, pathname])
 

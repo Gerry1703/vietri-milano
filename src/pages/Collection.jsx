@@ -237,7 +237,7 @@ export default function Collection() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4
-                     auto-rows-[50vw] md:auto-rows-[33.333vw] lg:auto-rows-[25vw]
+                     auto-rows-[66.667vw] md:auto-rows-[44.444vw] lg:auto-rows-[33.333vw]
                      border-l border-t border-brown-dark/10"
         >
           {filtered.map((p, i) => (

@@ -1,11 +1,7 @@
 import sciarpaRossaHero from '@/assets/images/scarves/hero-silk.jpg'
-import sciarpaRossaGrid from '@/assets/images/scarves/sciarpa-rossa-grid.png'
 import venezia2         from '@/assets/images/scarves/venezia-2.jpg'
 import venezia3         from '@/assets/images/scarves/venezia-3.jpg'
 import venezia4         from '@/assets/images/scarves/venezia-4.jpg'
-import sciarpaRossaAlt  from '@/assets/images/scarves/sciarpa-rossa-alt.png'
-import sciarpaArancio   from '@/assets/images/scarves/sciarpa-arancio.png'
-import sciarpaVietri    from '@/assets/images/scarves/sciarpa-vietri.png'
 import capriModel       from '@/assets/images/scarves/capri-model.jpg'
 import capriFlat        from '@/assets/images/scarves/capri-flat.jpg'
 import capriDetail      from '@/assets/images/scarves/capri-detail.jpg'
@@ -15,12 +11,32 @@ import ravelloDetail    from '@/assets/images/scarves/ravello-detail.jpg'
 import portofinoModel   from '@/assets/images/scarves/portofino-model.jpg'
 import portofinoFlat    from '@/assets/images/scarves/portofino-flat.jpg'
 import portofinoDetail  from '@/assets/images/scarves/portofino-detail.jpg'
-import borsaVerde       from '@/assets/images/bags/borsa-verde.png'
+import veneziaBeige        from '@/assets/images/scarves/venezia-beige-flat.png'
+import veneziaBeigeSquare  from '@/assets/images/scarves/venezia-beige-square.png'
+import veneziaBeigeModel1  from '@/assets/images/scarves/venezia-beige-model1.png'
+import veneziaBeigeModel2  from '@/assets/images/scarves/venezia-beige-model2.png'
+import veneziaBeigeTexture from '@/assets/images/scarves/venezia-beige-texture.png'
+import veneziaBeigeHalf    from '@/assets/images/scarves/venezia-beige-halfopen.png'
+import veneziaBeigeCorner  from '@/assets/images/scarves/venezia-beige-corner.png'
+import veneziaBeigeFloat   from '@/assets/images/scarves/venezia-beige-floating.png'
+import borsaVerde          from '@/assets/images/bags/borsa-verde.png'
 import borsaCognac      from '@/assets/images/bags/borsa-cognac.jpg'
 import borsaBrera       from '@/assets/images/bags/borsa-brera.png'
 import borsaFlatlay     from '@/assets/images/bags/borsa-flatlay.png'
 
 export const products = [
+  {
+    id: 11,
+    name: 'Sciarpa Venezia Beige',
+    category: 'Sciarpe',
+    material: 'Seta pura',
+    price: '€ 290',
+    color: 'Avorio Naturale',
+    image: veneziaBeige,
+    gallery: [veneziaBeigeSquare, veneziaBeigeModel1, veneziaBeigeModel2, veneziaBeigeTexture, veneziaBeigeHalf, veneziaBeigeCorner, veneziaBeigeFloat],
+    tag: 'NEW',
+    description: 'Seta avorio in tinta naturale. Silenziosa, leggera, senza tempo.',
+  },
   {
     id: 1,
     name: 'Sciarpa Venezia',
@@ -28,43 +44,10 @@ export const products = [
     material: 'Seta pura',
     price: '€ 290',
     color: 'Rosso Borgogna',
-    image: sciarpaRossaGrid,
-    gallery: [venezia2, venezia3, venezia4],
+    image: venezia2,
+    gallery: [venezia3, venezia4],
     tag: 'NEW',
     description: 'Seta leggera come un respiro. Tinta in rosso borgogna, drappeggiata a mano.',
-  },
-  {
-    id: 2,
-    name: 'Sciarpa Bellagio',
-    category: 'Sciarpe',
-    material: 'Seta pura',
-    price: '€ 290',
-    color: 'Rosso Rubino',
-    image: sciarpaRossaAlt,
-    tag: null,
-    description: 'Stessa anima, luce diversa. La seta cambia con chi la indossa.',
-  },
-  {
-    id: 3,
-    name: 'Sciarpa Cortina',
-    category: 'Sciarpe',
-    material: 'Lana & seta',
-    price: '€ 320',
-    color: 'Arancio Bruciato',
-    image: sciarpaArancio,
-    tag: null,
-    description: 'Jacquard arancio bruciato. Calore che non pesa.',
-  },
-  {
-    id: 4,
-    name: 'Sciarpa Vietri',
-    category: 'Sciarpe',
-    material: 'Seta pura',
-    price: '€ 310',
-    color: 'Avorio Botanico',
-    image: sciarpaVietri,
-    tag: 'NEW',
-    description: 'Stampa botanica su seta naturale. Fiori, foglie e il marchio VIETRI Milano tessuto nel tempo.',
   },
   {
     id: 8,
