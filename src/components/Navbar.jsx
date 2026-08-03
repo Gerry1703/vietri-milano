@@ -13,6 +13,14 @@ const links = [
   { label: 'Dove ci troviamo', to: '/dove-ci-troviamo' },
 ]
 
+/* Recapiti mostrati nel menu mobile (sul desktop stanno fra le icone in alto a
+   sinistra, dove sul telefono non c'è spazio).
+   ATTENZIONE: il numero di telefono non è ancora stato fornito — finché PHONE
+   resta vuoto la riga non viene mostrata. Meglio nessun contatto che un link che
+   apre il telefono su un numero incompleto (il desktop punta a `tel:+39`). */
+const EMAIL = 'info@vietrimilano.com'
+const PHONE = ''
+
 // Messaggi rotanti — visibili SOLO in cima alla home (header espanso); spariscono allo scroll.
 const banners = [
   'Iscriviti alla newsletter per rimanere aggiornato sulle ultime novità',
@@ -180,7 +188,9 @@ export default function Navbar({ onCartOpen, cartCount, favoritesCount = 0 }) {
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
             </button>
-            <Link to="/preferiti" aria-label="Preferiti" className={`relative hidden md:block transition-colors duration-300 ${hoverColor}`}>
+            {/* Cuore/preferiti: visibile SEMPRE, anche su telefono — è l'unico
+                accesso alla wishlist. */}
+            <Link to="/preferiti" aria-label="Preferiti" className={`relative block transition-colors duration-300 ${hoverColor}`}>
               <svg className={utilIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
               </svg>
@@ -319,6 +329,36 @@ export default function Navbar({ onCartOpen, cartCount, favoritesCount = 0 }) {
                 </Link>
               ))}
             </nav>
+
+            {/* Contatti in fondo al menu: sul desktop sono le icone telefono/mail
+                in alto a sinistra, qui in chiaro perché su telefono si tocca. */}
+            <div className="shrink-0 px-6 pb-8 pt-5 border-t border-brown-dark/10">
+              <h3 className="font-jost font-light text-brown-dark/40 text-[11px] uppercase tracking-[0.2em] mb-4">
+                Contatti
+              </h3>
+              <div className="flex flex-col gap-4">
+                {PHONE && (
+                  <a
+                    href={`tel:${PHONE.replace(/\s/g, '')}`}
+                    className="flex items-center gap-3 font-inter font-light text-brown-dark text-sm"
+                  >
+                    <svg className="w-[17px] h-[17px] shrink-0 text-brown-mid" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>
+                    </svg>
+                    {PHONE}
+                  </a>
+                )}
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="flex items-center gap-3 font-inter font-light text-brown-dark text-sm"
+                >
+                  <svg className="w-[17px] h-[17px] shrink-0 text-brown-mid" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 6 10 7L22 6"/>
+                  </svg>
+                  {EMAIL}
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,10 +1,26 @@
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useScrollLock } from '@/hooks/useScrollLock'
 
 const ease = [0.22, 1, 0.36, 1]
 
 /* Carrello — sempre chiaro: fondo bianco e testi neri (mai marrone/scuro,
    nessun accento in oro). */
 export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQty, total, onCheckout }) {
+  // Il blocco dello scorrimento vale solo su telefono: sul desktop il carrello
+  // si comporta come prima.
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches
+  )
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const onChange = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  useScrollLock(isOpen && isMobile)
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -16,7 +32,7 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[70] bg-black/30"
+            className="fixed inset-0 z-[70] bg-black/30 touch-none"
             onClick={onClose}
           />
 
@@ -40,7 +56,9 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
             </div>
 
             {/* Items */}
-            <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
+            {/* overscroll-contain: arrivati in fondo alla lista lo scorrimento
+                non "trabocca" sulla pagina dietro. */}
+            <div className="flex-1 overflow-y-auto overscroll-contain px-8 py-6 space-y-6">
               {items.length === 0 ? (
                 <p className="font-cormorant font-light italic text-black/45 text-lg text-center mt-10">
                   Il carrello è vuoto.
