@@ -2,6 +2,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1]
 
+/* Carrello — sempre chiaro: fondo bianco e testi neri (mai marrone/scuro,
+   nessun accento in oro). */
 export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQty, total, onCheckout }) {
   return (
     <AnimatePresence>
@@ -14,7 +16,7 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[70] bg-black/40"
+            className="fixed inset-0 z-[70] bg-black/30"
             onClick={onClose}
           />
 
@@ -25,12 +27,12 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease }}
-            className="fixed top-0 right-0 bottom-0 z-[80] w-full max-w-sm bg-beige-warm flex flex-col"
+            className="fixed top-0 right-0 bottom-0 z-[80] w-full max-w-sm bg-white flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-8 py-6 border-b border-beige-light/10">
-              <h2 className="label-upper text-beige-light tracking-widest2">Carrello</h2>
-              <button onClick={onClose} className="text-beige-light/60 hover:text-beige-light transition-colors">
+            <div className="flex items-center justify-between px-8 py-6 border-b border-black/10">
+              <h2 className="label-upper text-black tracking-widest2">Carrello</h2>
+              <button onClick={onClose} className="text-black/50 hover:text-black transition-colors">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -40,33 +42,33 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
             {/* Items */}
             <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
               {items.length === 0 ? (
-                <p className="font-cormorant font-light italic text-beige-light/50 text-lg text-center mt-10">
+                <p className="font-cormorant font-light italic text-black/45 text-lg text-center mt-10">
                   Il carrello è vuoto.
                 </p>
               ) : (
                 items.map(item => (
                   <div key={item.id} className="flex gap-4">
-                    <div className="w-20 h-20 flex-shrink-0 overflow-hidden" style={{ background: '#1a1008' }}>
+                    <div className="w-20 h-20 flex-shrink-0 overflow-hidden bg-[#F5F3EF]">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-cormorant font-normal text-beige-light text-lg leading-tight">{item.name}</p>
-                      <p className="label-upper text-beige-light/50 text-[10px] mt-1">{item.material}</p>
-                      <p className="font-inter font-light text-gold text-sm mt-1">{item.price}</p>
+                      <p className="font-cormorant font-normal text-black text-lg leading-tight">{item.name}</p>
+                      <p className="label-upper text-black/45 text-[10px] mt-1">{item.material}</p>
+                      <p className="font-inter font-light text-black text-sm mt-1">{item.price}</p>
 
                       <div className="flex items-center gap-3 mt-2">
                         <button
                           onClick={() => onUpdateQty(item.id, item.qty - 1)}
-                          className="w-6 h-6 border border-beige-light/20 text-beige-light/60 hover:text-beige-light text-xs flex items-center justify-center transition-colors"
+                          className="w-6 h-6 border border-black/20 text-black/60 hover:text-black hover:border-black/50 text-xs flex items-center justify-center transition-colors"
                         >−</button>
-                        <span className="font-inter font-light text-beige-light text-sm w-4 text-center">{item.qty}</span>
+                        <span className="font-inter font-light text-black text-sm w-4 text-center">{item.qty}</span>
                         <button
                           onClick={() => onUpdateQty(item.id, item.qty + 1)}
-                          className="w-6 h-6 border border-beige-light/20 text-beige-light/60 hover:text-beige-light text-xs flex items-center justify-center transition-colors"
+                          className="w-6 h-6 border border-black/20 text-black/60 hover:text-black hover:border-black/50 text-xs flex items-center justify-center transition-colors"
                         >+</button>
                         <button
                           onClick={() => onRemove(item.id)}
-                          className="ml-auto text-beige-light/30 hover:text-beige-light/70 transition-colors text-xs label-upper"
+                          className="ml-auto text-black/35 hover:text-black transition-colors text-xs label-upper"
                         >
                           Rimuovi
                         </button>
@@ -79,14 +81,17 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQ
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="px-8 py-6 border-t border-beige-light/10">
+              <div className="px-8 py-6 border-t border-black/10">
                 <div className="flex justify-between mb-6">
-                  <span className="label-upper text-beige-light/60 tracking-widest2">Totale</span>
-                  <span className="font-cormorant font-light text-beige-light text-xl">
+                  <span className="label-upper text-black/55 tracking-widest2">Totale</span>
+                  <span className="font-cormorant font-light text-black text-xl">
                     € {total.toLocaleString('it-IT', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
-                <button onClick={onCheckout} className="w-full btn-outline-gold py-4">
+                <button
+                  onClick={onCheckout}
+                  className="w-full font-inter uppercase text-[12px] tracking-[0.22em] border border-black text-black py-4 transition-colors duration-300 hover:bg-black hover:text-white"
+                >
                   Procedi all'Acquisto
                 </button>
               </div>

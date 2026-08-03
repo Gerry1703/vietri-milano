@@ -1,43 +1,29 @@
 import { useRef, useEffect } from 'react'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const ease = [0.22, 1, 0.36, 1]
 
 export default function Hero() {
-  const ref = useRef(null)
   const videoRef = useRef(null)
-  const reduceMotion = useReducedMotion()
-
-  // Scroll-linked "retreat": as the collection rises over the hero, the text
-  // scales down a touch and a veil dims the scene — giving depth, not a flat cover.
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  })
-  const textScale = useTransform(scrollYProgress, [0, 1], reduceMotion ? [1, 1] : [1, 0.94])
-  const dim       = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, 0.55])
 
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    // React doesn't render the `muted` HTML attribute; force it so iOS/Safari
-    // allow inline autoplay (it gates on the muted attribute being present).
+    // React non rende l'attributo `muted`: lo forzo così iOS/Safari permettono
+    // l'autoplay inline.
     v.muted = true
     v.defaultMuted = true
     v.setAttribute('muted', '')
     const attempt = () => v.play().catch(() => {})
-    if (v.readyState >= 3) {
-      attempt()
-    } else {
-      v.addEventListener('canplay', attempt, { once: true })
-    }
+    if (v.readyState >= 3) attempt()
+    else v.addEventListener('canplay', attempt, { once: true })
     return () => v.removeEventListener('canplay', attempt)
   }, [])
 
   return (
-    <section ref={ref} data-nav-theme="dark" className="sticky top-0 h-screen overflow-hidden z-0">
-      {/* Video background — deliberately NOT inside a transformed container:
-          Safari fails to paint <video> when an ancestor has a transform. */}
+    <section data-nav-theme="dark" className="relative h-screen w-full overflow-hidden snap-start snap-always">
+      {/* Video di sfondo */}
       <div className="absolute inset-0 w-full h-full">
         <video
           ref={videoRef}
@@ -50,48 +36,72 @@ export default function Hero() {
         >
           <source src="/vietri-hero-boomerang.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/25" />
+        <div className="absolute inset-0 bg-black/35" />
       </div>
 
-      {/* Content */}
-      <motion.div
-        style={{ scale: textScale }}
-        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 origin-center"
-      >
+      {/* Contenuto centrale */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease }}
-          className="font-cormorant font-light text-cream uppercase tracking-widest4 leading-none"
-          style={{ fontSize: 'clamp(48px, 12vw, 160px)' }}
+          transition={{ duration: 1.2, delay: 0.3, ease }}
+          className="font-jost font-light text-cream tracking-wide leading-tight"
+          style={{ fontSize: 'clamp(34px, 5vw, 64px)' }}
         >
-          VIETRI
+          Radici Mediterranee
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.5, ease }}
-          className="label-upper text-gold mt-4 tracking-widest3 text-sm"
+          transition={{ duration: 1.2, delay: 0.6, ease }}
+          className="font-jost font-light text-cream/90 text-sm md:text-base tracking-[0.1em] mt-3"
         >
-          MILANO
+          Nuova Collezione
         </motion.p>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
         <motion.div
-          animate={{ scaleY: [1, 0.4, 1], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-px h-10 bg-cream/60 origin-top"
-        />
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.9, ease }}
+          className="flex flex-col sm:flex-row items-center gap-6 sm:gap-12 mt-9"
+        >
+          {[
+            { label: 'Collezione Sciarpe', to: '/collection?cat=sciarpe' },
+            { label: 'Collezione Borse',   to: '/collection?cat=borse' },
+          ].map((cta) => (
+            <Link
+              key={cta.label}
+              to={cta.to}
+              className="group font-jost font-light text-cream text-[13px] uppercase tracking-[0.2em]"
+            >
+              {cta.label}
+              <span className="block h-px bg-cream/70 mt-1.5 origin-left transition-transform duration-500 group-hover:scale-x-110" />
+            </Link>
+          ))}
+        </motion.div>
       </div>
 
-      {/* Darkening veil — fades in as the collection panel covers the hero */}
+      {/* Dots di paginazione — destra */}
+      <div className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-3">
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className={`w-[6px] h-[6px] rounded-full ${i === 0 ? 'bg-cream' : 'bg-cream/40'}`}
+          />
+        ))}
+      </div>
+
+      {/* Freccia scroll — basso */}
       <motion.div
-        style={{ opacity: dim }}
-        className="absolute inset-0 bg-black pointer-events-none z-20"
-      />
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 text-cream/80"
+      >
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </motion.div>
     </section>
   )
 }

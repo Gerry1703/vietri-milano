@@ -23,6 +23,9 @@ import borsaVerde          from '@/assets/images/bags/borsa-verde.png'
 import borsaCognac      from '@/assets/images/bags/borsa-cognac.jpg'
 import borsaBrera       from '@/assets/images/bags/borsa-brera.png'
 import borsaFlatlay     from '@/assets/images/bags/borsa-flatlay.png'
+import borsaNuovi       from '@/assets/images/bags/nuovi-arrivi-borse.jpg'
+import sciarpaMilanoAvorio from '@/assets/images/scarves/sciarpa-milano-avorio.jpg'
+import sciarpaVeneziaPois  from '@/assets/images/scarves/sciarpa-venezia-pois.jpg'
 
 export const products = [
   {
@@ -117,6 +120,41 @@ export const products = [
     image: borsaFlatlay,
     tag: 'ESCLUSIVO',
     description: 'Clutch in camoscio sabbia con foulard abbinato. Due pezzi, un solo gesto.',
+  },
+  {
+    id: 12,
+    name: 'Sciarpa Milano Avorio',
+    category: 'Sciarpe',
+    material: 'Seta pura',
+    price: '€ 300',
+    color: 'Avorio & Nero',
+    image: sciarpaMilanoAvorio,
+    gallery: [veneziaBeigeSquare, veneziaBeigeTexture, veneziaBeigeCorner],
+    tag: 'NEW',
+    description: 'Seta avorio con bordo a contrasto nero. Essenziale, disegnata per Milano.',
+  },
+  {
+    id: 13,
+    name: 'Sciarpa Venezia Pois',
+    category: 'Sciarpe',
+    material: 'Seta pura',
+    price: '€ 310',
+    color: 'Avorio & Cuoio',
+    image: sciarpaVeneziaPois,
+    gallery: [veneziaBeigeHalf, veneziaBeigeFloat],
+    tag: 'NEW',
+    description: 'Motivo grafico su seta avorio, bordo cuoio. Un disegno che gioca con la geometria.',
+  },
+  {
+    id: 14,
+    name: 'Borsa Cuoio',
+    category: 'Borse',
+    material: 'Pelle italiana',
+    price: '€ 850',
+    color: 'Cuoio',
+    image: borsaNuovi,
+    tag: 'NEW',
+    description: 'Pelle cuoio dalla grana pieno fiore. Struttura pulita, manico in tinta.',
   },
 ]
 

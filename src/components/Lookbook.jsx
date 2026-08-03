@@ -114,7 +114,7 @@ export default function Lookbook({ onAddToCart }) {
         variants={container}
         initial="hidden"
         animate={inView ? 'show' : 'hidden'}
-        className="flex flex-col items-center text-center mt-6 md:mt-10 mb-8 md:mb-12 px-6"
+        className="flex flex-col items-center text-center mt-10 md:mt-14 mb-8 md:mb-12 px-6"
       >
         <div className="flex items-center gap-5 md:gap-10">
           <motion.span variants={drawLine} className="block h-px w-8 md:w-28 bg-gold/45 origin-right" />
