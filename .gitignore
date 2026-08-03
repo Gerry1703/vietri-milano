@@ -28,3 +28,7 @@ dist-ssr
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Materiale social e poster: restano in locale, non vanno nel sito
+social-vietri
+poster-campagna

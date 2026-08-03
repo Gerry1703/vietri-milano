@@ -49,8 +49,9 @@ export default function Home() {
     <main>
       <Hero />
 
-      {/* Nuovi Arrivi — due riquadri a schermo intero */}
-      <section className="h-screen w-full snap-start snap-always grid grid-cols-2 gap-[2px] bg-white">
+      {/* Nuovi Arrivi — due riquadri a schermo intero.
+          Su mobile impilati (foto orizzontali), da md in poi affiancati. */}
+      <section className="h-screen w-full snap-start snap-always grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 gap-[2px] bg-white">
         <Panel img={nuoviArriviSciarpe} caption="Nuovi Arrivi — Sciarpe" to="/collection?cat=sciarpe" />
         <Panel img={nuoviArriviBorse}   caption="Nuovi Arrivi — Borse"   to="/collection?cat=borse" />
       </section>
