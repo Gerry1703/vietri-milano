@@ -95,14 +95,17 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
 
   return (
     <main className="bg-white min-h-screen pb-24">
-      <section className="min-h-[30vh] flex flex-col items-center px-6 pt-28 md:pt-32">
+      {/* Su telefono niente altezza minima e meno spazio sopra: serve a far
+          entrare foto + nome + prezzo + "Aggiungi al carrello" nella prima
+          schermata. Sul desktop resta com'era. */}
+      <section className="md:min-h-[30vh] flex flex-col items-center px-6 pt-20 md:pt-32">
         <h1
           className="font-cormorant font-normal uppercase text-brown-dark text-center leading-none"
           style={{ fontSize: 'clamp(24px, 3vw, 40px)', letterSpacing: '0.42em', paddingLeft: '0.42em' }}
         >
           Wishlist
         </h1>
-        <p className="label-upper text-brown-dark/40 tracking-widest2 mt-6">
+        <p className="label-upper text-brown-dark/40 tracking-widest2 mt-3 md:mt-6">
           {items.length === 0
             ? 'Nessun prodotto salvato'
             : `${items.length} ${items.length === 1 ? 'prodotto' : 'prodotti'}`}
@@ -124,10 +127,12 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
       ) : (
         <div>
           {/* Barra azioni */}
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-y border-brown-dark/10 py-5 mb-10 px-6">
+          {/* Su telefono restano solo Condividi e Seleziona prodotti: le altre tre
+              erano troppe scritte e mandavano la barra su tre righe. */}
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-y border-brown-dark/10 py-4 md:py-5 mb-6 md:mb-10 px-6">
             <button
               onClick={handleSaveWishlist}
-              className="font-inter uppercase text-[11px] tracking-[0.18em] text-brown-dark/70 hover:text-brown-dark transition-colors duration-300"
+              className="hidden md:block font-inter uppercase text-[11px] tracking-[0.18em] text-brown-dark/70 hover:text-brown-dark transition-colors duration-300"
             >
               Salva wishlist
             </button>
@@ -216,14 +221,14 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
             <span className="hidden md:block w-px h-3 bg-brown-dark/15" />
             <button
               onClick={handleBuy}
-              className="font-inter uppercase text-[11px] tracking-[0.18em] text-brown-dark/70 hover:text-brown-dark transition-colors duration-300"
+              className="hidden md:block font-inter uppercase text-[11px] tracking-[0.18em] text-brown-dark/70 hover:text-brown-dark transition-colors duration-300"
             >
               Acquista {buyTargets.length} {buyTargets.length === 1 ? 'prodotto' : 'prodotti'}
             </button>
             <span className="hidden md:block w-px h-3 bg-brown-dark/15" />
             <button
               onClick={handleCreaAbbinamento}
-              className="font-inter uppercase text-[11px] tracking-[0.18em] text-brown-dark/70 hover:text-brown-dark transition-colors duration-300"
+              className="hidden md:block font-inter uppercase text-[11px] tracking-[0.18em] text-brown-dark/70 hover:text-brown-dark transition-colors duration-300"
             >
               {selectMode ? 'Crea abbinamenti' : 'Abbinamenti'}
             </button>

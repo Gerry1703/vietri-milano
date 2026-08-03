@@ -178,8 +178,15 @@ export default function Collection({ isFavorite, onToggleFavorite }) {
              blocco (mt-auto): lo spazio in più finisce SOPRA, tra il titolo e i
              filtri, e la riga 1 di foto comincia sempre esattamente al bordo
              dello schermo — mai un pezzo della riga 2 che sbuca sotto. ── */}
-      <div className="flex flex-col min-h-[calc(100vh-75vw)] md:min-h-[calc(100vh-37.5vw)]">
-      <section className="flex flex-col items-center px-6 pt-20 md:pt-24 pb-8 shrink-0">
+      {/* Su telefono si riservano 90vw invece di 75vw: la prima riga (75vw) sale
+          di ~15vw e sotto si intravede l'inizio della seconda. `svh` e non `vh`
+          perché su Safari `100vh` è lo schermo SENZA la barra degli indirizzi, e
+          la riga finiva sotto il bordo visibile. Il desktop resta invariato. */}
+      <div className="flex flex-col min-h-[calc(100svh-90vw)] md:min-h-[calc(100vh-37.5vw)]">
+      {/* flex-1 + justify-evenly: su telefono briciole di pane, titolo e tab si
+          distribuiscono nello spazio invece di ammassarsi in alto lasciando un
+          vuoto sopra la barra filtri. */}
+      <section className="flex flex-col items-center justify-evenly md:justify-start px-6 pt-20 md:pt-24 pb-8 flex-1 md:flex-none">
           <nav className="font-inter text-[10px] uppercase tracking-[0.18em] text-brown-dark/40 mb-5">
             <Link to="/" className="hover:text-brown-dark transition-colors duration-300">Home</Link>
             <span className="mx-2">/</span>
