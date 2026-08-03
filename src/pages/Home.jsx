@@ -51,7 +51,7 @@ export default function Home() {
 
       {/* Nuovi Arrivi — due riquadri a schermo intero.
           Su mobile impilati (foto orizzontali), da md in poi affiancati. */}
-      <section className="h-screen w-full snap-start snap-always grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 gap-[2px] bg-white">
+      <section className="h-dvh md:h-screen w-full snap-start snap-always grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 gap-[2px] bg-white">
         <Panel img={nuoviArriviSciarpe} caption="Nuovi Arrivi — Sciarpe" to="/collection?cat=sciarpe" />
         <Panel img={nuoviArriviBorse}   caption="Nuovi Arrivi — Borse"   to="/collection?cat=borse" />
       </section>
@@ -61,7 +61,7 @@ export default function Home() {
 
       {/* Esplora la collezione — stessa foto/impostazione della pagina di ricerca,
           qui come sezione fissa della home invece che overlay. */}
-      <section className="relative h-screen w-full snap-start snap-always overflow-hidden bg-brown-dark">
+      <section className="relative h-dvh md:h-screen w-full snap-start snap-always overflow-hidden bg-brown-dark">
         <img
           src={searchBg}
           alt=""

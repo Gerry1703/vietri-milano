@@ -53,7 +53,7 @@ export default function CollezioneSciarpe() {
   }
 
   return (
-    <section className="bg-white w-full min-h-screen snap-start snap-always flex flex-col justify-start pt-[14vh] md:pt-[16vh] pb-14">
+    <section className="bg-white w-full min-h-dvh md:min-h-screen snap-start snap-always flex flex-col justify-start pt-[12dvh] md:pt-[16vh] pb-10 md:pb-14">
       {/* Intestazione */}
       <div className="px-6 md:px-10 text-center max-w-2xl mx-auto mb-10 md:mb-14">
         <h2 className="font-cormorant font-medium text-brown-dark text-3xl md:text-[42px] leading-tight">
@@ -79,8 +79,7 @@ export default function CollezioneSciarpe() {
               className="group flex-shrink-0 snap-start w-[80%] sm:w-[47%] md:w-1/3 lg:w-1/4"
             >
               <div
-                className="overflow-hidden bg-[#F5F3EF] flex items-center justify-center"
-                style={{ height: 'clamp(280px, 50vh, 560px)' }}
+                className="overflow-hidden bg-[#F5F3EF] flex items-center justify-center h-[clamp(280px,50dvh,560px)] md:h-[clamp(280px,50vh,560px)]"
               >
                 <img
                   src={c.img}
@@ -119,7 +118,7 @@ export default function CollezioneSciarpe() {
       </div>
 
       {/* Barra di avanzamento */}
-      <div className="mt-12 md:mt-16 px-6 md:px-10 w-full max-w-sm mx-auto">
+      <div className="mt-8 md:mt-16 px-6 md:px-10 w-full max-w-sm mx-auto">
         <div className="relative h-px bg-brown-dark/15">
           <div
             className="absolute top-0 h-px bg-brown-dark transition-all duration-200 ease-out"
