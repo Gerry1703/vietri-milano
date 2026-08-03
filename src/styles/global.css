@@ -14,13 +14,24 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* `hidden` su html crea un contenitore di scorrimento e su Safari iOS
+       impedisce allo scroll-snap di agganciare al tocco. `clip` taglia allo
+       stesso modo senza creare il contenitore; la riga `hidden` resta come
+       ripiego per i browser che non conoscono `clip`. */
     overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* Scroll-snap "automatico" alla Brunello Cucinelli: attivo solo sulla home
      (classe aggiunta da Home.jsx). Ogni sezione a schermo intero si aggancia. */
   html.snap-sections {
     scroll-snap-type: y mandatory;
+  }
+  /* Su telefono lo scorrimento morbido litiga con lo snap: l'animazione di
+     `smooth` e quella dell'aggancio partono insieme e il colpo di dito finisce
+     a metà strada. Sul desktop resta com'era. */
+  @media (max-width: 767px) {
+    html.snap-sections { scroll-behavior: auto; }
   }
   @media (prefers-reduced-motion: reduce) {
     html.snap-sections { scroll-snap-type: none; }

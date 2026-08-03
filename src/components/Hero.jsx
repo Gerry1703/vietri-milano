@@ -22,7 +22,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section data-nav-theme="dark" className="relative h-dvh md:h-screen w-full overflow-hidden snap-start snap-always">
+    <section data-nav-theme="dark" className="relative h-svh md:h-screen w-full overflow-hidden snap-start snap-always">
       {/* Video di sfondo */}
       <div className="absolute inset-0 w-full h-full">
         <video

@@ -18,7 +18,7 @@ export default function EditorialBand() {
   }, [])
 
   return (
-    <section className="relative h-dvh md:h-screen w-full snap-start snap-always overflow-hidden bg-brown-dark">
+    <section className="relative h-svh md:h-screen w-full snap-start snap-always overflow-hidden bg-brown-dark">
       {/* Sfondo che cambia — dissolvenza lenta + micro zoom */}
       <AnimatePresence>
         <motion.img
