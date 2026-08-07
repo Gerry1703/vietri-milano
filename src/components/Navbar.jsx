@@ -108,6 +108,17 @@ export default function Navbar({ onCartOpen, cartCount, favoritesCount = 0 }) {
                 <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
               </svg>
             </button>
+            {/* Cerca accanto al menu solo su mobile: sul desktop resta a destra
+                insieme a preferiti/account/carrello, dov'era prima. */}
+            <button
+              aria-label="Cerca"
+              onClick={() => setSearchOpen((v) => !v)}
+              className={`md:hidden transition-colors duration-300 ${textColor} ${hoverColor}`}
+            >
+              <svg className={utilIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </button>
             <a href="#" aria-label="Lingua" className={`hidden md:block transition-colors duration-300 ${textColor} ${hoverColor}`}>
               <svg className={utilIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
                 <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>
@@ -183,7 +194,7 @@ export default function Navbar({ onCartOpen, cartCount, favoritesCount = 0 }) {
 
           {/* Account icons — destra */}
           <div className={`flex items-center gap-5 ${textColor}`}>
-            <button aria-label="Cerca" onClick={() => setSearchOpen((v) => !v)} className={`transition-colors duration-300 ${hoverColor}`}>
+            <button aria-label="Cerca" onClick={() => setSearchOpen((v) => !v)} className={`hidden md:block transition-colors duration-300 ${hoverColor}`}>
               <svg className={utilIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
