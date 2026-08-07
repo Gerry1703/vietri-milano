@@ -250,7 +250,7 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
             </button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-px gap-y-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-px gap-y-4 md:gap-y-10">
             {items.map((p) => {
               const isSelected = selectedIds.includes(p.id)
               return (
