@@ -92,16 +92,23 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Freccia scroll — basso */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 text-cream/80"
-      >
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </motion.div>
+      {/* Freccia scroll — basso.
+          Il centraggio orizzontale (classe Tailwind -translate-x-1/2) e il
+          rimbalzo verticale (Framer Motion) vivono su due div separati: sono
+          entrambi transform sulla stessa proprietà CSS, e se stanno sullo
+          stesso elemento lo style inline che Framer Motion scrive per animare
+          sovrascrive per intero la classe invece di aggiungersi — la freccia
+          restava sempre spostata a destra di metà della sua larghezza. */}
+      <div className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 text-cream/80">
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </motion.div>
+      </div>
     </section>
   )
 }
