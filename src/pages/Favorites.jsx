@@ -95,10 +95,13 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
 
   return (
     <main className="bg-white min-h-screen pb-24">
-      {/* Su telefono salta solo l'altezza minima del 30%: a schermo corto
-          riservava più spazio di quanto ne serva al titolo, spingendo giù le
-          foto. Le spaziature restano quelle del desktop — è la barra azioni su
-          una riga sola a far entrare tutto fino ad "Aggiungi al carrello". */}
+      {/* L'altezza minima del 30% su desktop non è solo "spazio sopra": nel box
+          flex-col senza justify esplicito, è lei a creare il vuoto TRA il
+          conteggio prodotti e la barra azioni sotto (lo spazio inutilizzato
+          resta in fondo al box, essendo il contenuto allineato in alto).
+          Togliendola su mobile ho tolto anche quello, e le due righe si sono
+          attaccate. Un margine dedicato lo rimette senza riportare l'altezza
+          minima intera (che rispingerebbe giù la foto oltre lo schermo). */}
       <section className="md:min-h-[30vh] flex flex-col items-center px-6 pt-28 md:pt-32">
         <h1
           className="font-cormorant font-normal uppercase text-brown-dark text-center leading-none"
@@ -106,7 +109,7 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
         >
           Wishlist
         </h1>
-        <p className="label-upper text-brown-dark/40 tracking-widest2 mt-6">
+        <p className="label-upper text-brown-dark/40 tracking-widest2 mt-6 mb-6 md:mb-0">
           {items.length === 0
             ? 'Nessun prodotto salvato'
             : `${items.length} ${items.length === 1 ? 'prodotto' : 'prodotti'}`}
