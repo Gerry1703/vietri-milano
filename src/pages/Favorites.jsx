@@ -102,7 +102,10 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
           Togliendola su mobile ho tolto anche quello, e le due righe si sono
           attaccate. Un margine dedicato lo rimette senza riportare l'altezza
           minima intera (che rispingerebbe giù la foto oltre lo schermo). */}
-      <section className="md:min-h-[30vh] flex flex-col items-center px-6 pt-28 md:pt-32">
+      {/* pt-28 sotto md era il doppio dell'altezza della navbar (56px): tolto
+          il margine in eccesso e spostato sotto, sulla barra azioni, per
+          allontanare le foto SENZA aggiungere altezza totale alla pagina. */}
+      <section className="md:min-h-[30vh] flex flex-col items-center px-6 pt-20 md:pt-32">
         <h1
           className="font-cormorant font-normal uppercase text-brown-dark text-center leading-none"
           style={{ fontSize: 'clamp(24px, 3vw, 40px)', letterSpacing: '0.42em', paddingLeft: '0.42em' }}
@@ -133,7 +136,7 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
           {/* Barra azioni */}
           {/* Su telefono restano solo Condividi e Seleziona prodotti: le altre tre
               erano troppe scritte e mandavano la barra su tre righe. */}
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-y border-brown-dark/10 py-5 mb-10 px-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-y border-brown-dark/10 py-5 mb-16 md:mb-10 px-6">
             <button
               onClick={handleSaveWishlist}
               className="hidden md:block font-inter uppercase text-[11px] tracking-[0.18em] text-brown-dark/70 hover:text-brown-dark transition-colors duration-300"
@@ -305,8 +308,12 @@ export default function Favorites({ favoriteIds = [], onToggleFavorite, onAddToC
 
                   </div>
 
+                  {/* min-h-[42px] = due righe a 21px di interlinea: senza,
+                      "Borsa Brera" (una riga) e "Sciarpa Milano Avorio" (due
+                      righe) finiscono a altezze diverse e "Aggiungi al
+                      carrello" non è più alla stessa quota in tutta la riga. */}
                   <Link to={`/product/${p.id}`} className="block mt-3 px-3 text-center">
-                    <p className="font-cormorant font-semibold text-black text-[14px] uppercase tracking-[0.14em]">{p.name}</p>
+                    <p className="font-cormorant font-semibold text-black text-[14px] uppercase tracking-[0.14em] line-clamp-2 min-h-[42px] md:line-clamp-none md:min-h-0">{p.name}</p>
                     <p className="font-inter font-medium text-black/80 text-[12px] mt-1">{p.price}</p>
                   </Link>
 
